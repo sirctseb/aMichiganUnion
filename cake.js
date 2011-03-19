@@ -4,7 +4,7 @@
     
     var methods = {
       init: function (options) {
-        var returnval = this.each(function(options) {
+        var returnval = this.each(function() {
           var settings = {
             level: 1,
             state: 'closed'
@@ -16,20 +16,15 @@
           if(!data) {
             $this.bind('click.cake', methods.toggle);
             
+			// add level and open/close state to body section of cake
             $this.data('cake', {level:settings.level, state:settings.state});
-            alert('set level to ' + $this.data('cake').level);
           }
           
         });
-        alert('after init, state is: ' + this.data('cake').state);
-        alert('after init, level is: ' + this.data('cake').level);
       },
       // $(this) because it is a response to a js event
       toggle: function() {
         // assuming only calling on one
-        alert('before toggle, id is: ' + $(this).attr('id'));
-        alert('before toggle, state is: ' + $(this).data('cake').state);
-        alert('before toggle, level is: ' + $(this).data('cake').level);
         if($(this).data('cake').state == 'open') {
           $(this).cake('close');
         } else {
@@ -37,44 +32,61 @@
         }
       },
       open: function () {
-        alert('start open');
         // close all other tiers
         $(".tier").not(this).cake('close');
-        
+        // hide label
+		this.children('.tierlabel').hide();
         // widen tier
-        this.animate({width:'1000px'}, 500);
+        this.animate(
+		{width:'1000px', height:'' + this.children(".tiercontent").height() + 'px'},
+		{
+			duration: 500,
+			// show contents once open
+			complete: function(){
+				$(this).children(".tiercontent").fadeIn();
+			}
+		});
         // widen icing above
         this.prev().animate({width:'1000px'}, 500);
         // widen icing below
         this.next().animate({width:'1000px'}, 500);
         
         // set open data
-        this.data('cake', {state:'open'});
-        alert('after open, state is: ' + this.data('cake').state);
-        alert('after open, level is: ' + this.data('cake').level);
-        this.data('cake', {level:100});
-        alert('after setting level, state is: ' + this.data('cake').state);
-        alert('after setting level, level is: ' + this.data('cake').level);
-        alert(this);
+        $.extend(this.data('cake'),{state:'open'});
         
       },
       close: function() {
-        // TODO bail if no cake data because i'm just testing on one right now
-        if(!this.data('cake')) return;
-        
-        alert(this.data('cake'));
-        var thiswidth = 160 + this.data('cake').level*40;
-        var nextwidth = thiswidth + 40;
-        // shrink tier
-        this.animate({width:"" + thiswidth + "px"});
-        // shrink icing above
-        this.animate({width:"" + thiswidth + "px"});
-        
-        // set close data
-        this.data('cake', {state:'closed'});
+	  	return this.each(
+	  	function() {
+			$this = $(this);
+			if ($this.data('cake').state == 'closed') 
+				return;
+			var thiswidth = 160 + $this.data('cake').level * 40;
+			var nextwidth = thiswidth + 40;
+			$this.children(".tiercontent").fadeOut();
+			$this.children(".tierlabel").show();
+			// shrink tier
+			$this.animate({
+				width: "" + thiswidth + "px",
+				height: "100px"
+			});
+			// shrink icing above
+			$this.prev().animate({
+				width: "" + thiswidth + "px"
+			});
+			// shrink icing below
+			$this.next().animate({
+				width: "" + nextwidth + "px"
+			});
+			
+			// set close data
+			$.extend($this.data('cake'), {
+				state: 'closed'
+			});
+		});
         
       }
-    }
+    };
     
     if(methods[method]) {
       return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));

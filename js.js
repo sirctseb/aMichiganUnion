@@ -4,11 +4,13 @@ function init() {
                                     animSpeed:100,
                                     effect:'fade'});
   $("#tier1").cake({level:1});
+  $("#tier2").cake({level:2});
+  $("#tiern").cake({level:3});
   //$("#tier1").click(openpics);
-  //$(".tiercontent").click(function(event) {event.stopPropagation();});
+  $(".tiercontent").click(function(event) {event.stopPropagation();});
 }
 
-function openpics(tier1) {
+/*function openpics(tier1) {
   if($("#tier1").hasClass("bigtier")) {
     $("#slider").hide();
     $(".tier1").animate({
@@ -42,4 +44,4 @@ function openpics(tier1) {
         width:"1000px"
       }, 500);
   }
-}
+}*/

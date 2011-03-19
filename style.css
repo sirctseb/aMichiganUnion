@@ -37,6 +37,11 @@
   margin-right:auto;
   width:800px;
 }
+.contentpad
+{
+	padding-top:20px;
+	padding-bottom:20px;
+}
 .tier1
 {
   width:200px;
