@@ -33,7 +33,7 @@
       },
       open: function () {
         // close all other tiers
-        $(".tier").not(this).cake('close');
+        $(".tier").not(this).cake('close').size();
         // hide label
 		this.children('.tierlabel').hide();
         // widen tier
@@ -44,12 +44,19 @@
 			// show contents once open
 			complete: function(){
 				$(this).children(".tiercontent").fadeIn();
-			}
+			},
+			queue:true
 		});
         // widen icing above
-        this.prev().animate({width:'1000px'}, 500);
+        this.prev().animate({width:'1000px'}, {
+			duration: 500,
+			queue: true
+		});
         // widen icing below
-        this.next().animate({width:'1000px'}, 500);
+        this.next().animate({width:'1000px'}, {
+			duration: 500,
+			queue: true
+		});
         
         // set open data
         $.extend(this.data('cake'),{state:'open'});
@@ -69,15 +76,15 @@
 			$this.animate({
 				width: "" + thiswidth + "px",
 				height: "100px"
-			});
+			},{duration:500, queue:true});
 			// shrink icing above
 			$this.prev().animate({
 				width: "" + thiswidth + "px"
-			});
+			}, {duration:500, queue:true});
 			// shrink icing below
 			$this.next().animate({
 				width: "" + nextwidth + "px"
-			});
+			}, {duration:500, queue:true});
 			
 			// set close data
 			$.extend($this.data('cake'), {

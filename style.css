@@ -8,6 +8,14 @@
   width:1024px;
   /*background-color:#888888;*/
 }
+.topper
+{
+	text-align:center;
+	margin-bottom:-8px;
+	/*z-index:2;
+	height:125px;
+	background:url(images/caketoppers.png) top center no-repeat;*/
+}
 .icing
 {
   /* background color comes through transparent icing */
@@ -24,7 +32,7 @@
 }
 .tier
 {
-  background:url(images/tierside.png) 5% 0px no-repeat,
+  background:url(images/tierside.png) 5% -40px no-repeat,
             url(images/tierside.png) 95% 0px no-repeat;
   height:100px;
   margin-left:auto;
@@ -56,15 +64,10 @@
 }
 .tierlabel
 {
+  padding-top:35px;
   text-align:center;
   font-size:large;
   height:100%;
-}
-
-/* todo */
-.bigtier
-{
-  /*height:auto;*/
 }
 
 .clear

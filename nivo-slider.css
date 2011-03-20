@@ -118,9 +118,9 @@
 }
 
 .nivo-controlNav {
-  position:absolute;
+  /*position:absolute;
   left:260px;
-  bottom:-42px;
+  bottom:-42px;*/
 }
 .nivo-controlNav a {
   display:block;
