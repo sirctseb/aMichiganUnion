@@ -6,7 +6,8 @@ function init() {
 									controlNav:false});
   $("#tier1").cake({level:1});
   $("#tier2").cake({level:2});
-  $("#tiern").cake({level:3});
+  $("#tier3").cake({level:3});
+  $("#tiern").cake({level:4});
   //$("#tier1").click(openpics);
   $(".tiercontent").click(function(event) {event.stopPropagation();});
 }

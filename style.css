@@ -32,8 +32,8 @@
 }
 .tier
 {
-  background:url(images/tierside.png) 5% -40px no-repeat,
-            url(images/tierside.png) 95% 0px no-repeat;
+  background:url(images/tierside.png) 5% -40px repeat-y,
+            url(images/tierside.png) 95% 0px repeat-y;
   height:100px;
   margin-left:auto;
   margin-right:auto;
@@ -58,9 +58,13 @@
 {
   width:240px;
 }
-.tiern
+.tier3
 {
   width:280px;
+}
+.tiern
+{
+  width:320px;
 }
 .tierlabel
 {
