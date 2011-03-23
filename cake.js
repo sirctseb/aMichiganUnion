@@ -32,8 +32,9 @@
         }
       },
       open: function () {
+      	$(".tier").clearQueue();
         // close all other tiers
-        $(".tier").not(this).cake('close').size();
+        $(".tier").not(this).cake('close');
         // hide label
 		this.find('.tierlabel').hide();
         // widen tier
@@ -66,6 +67,7 @@
 	  	return this.each(
 	  	function() {
 			$this = $(this);
+			$this.clearQueue();
 			if ($this.data('cake').state == 'closed') 
 				return;
 			var thiswidth = 160 + $this.data('cake').level * 40;
