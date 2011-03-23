@@ -1,16 +1,38 @@
 .centered
   {/*text-align:center;*/}
 
-.bridalparty
+.disabled
+{
+	display:none;
+}
+p.bridal
+{
+}
+.bridal-divide
+{
+	margin-left:auto;
+	margin-right:auto;
+	clear:both;
+	/* todo: background image and width/height */
+	background: url(images/icing.png) top center no-repeat;
+	width:600px;
+	height:20px;
+}
+.bridal-right
 {
 	float:right;
-	padding:10px;
+	padding:10px 0px 10px 10px;
+}
+.bridal-left
+{
+	float:left;
+	padding:10px 10px 10px 0px;
 }
 #outmostwrapper
 {
   margin-left:auto;
   margin-right:auto;
-  width:1024px;
+  /*width:1024px;*/
   /*background-color:#888888;*/
 }
 .topper
@@ -23,9 +45,6 @@
 }
 .icing
 {
-  /* background color comes through transparent icing */
-  /*background-color:#C600FF;*/
-  /*background-color:white;*/
   background:
             url(images/leftcap.png) top left no-repeat,
             url(images/rightcap.png) top right no-repeat,
@@ -69,7 +88,7 @@
 {
   width:280px;
 }
-.tiern
+.tier4
 {
   width:320px;
 }
