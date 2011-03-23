@@ -1,6 +1,11 @@
 .centered
   {/*text-align:center;*/}
 
+.bridalparty
+{
+	float:right;
+	padding:10px;
+}
 #outmostwrapper
 {
   margin-left:auto;
