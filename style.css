@@ -54,6 +54,28 @@ p.bridal
   margin-left:auto;
   margin-right:auto;
 }
+.icing0
+{
+	background:url(images/icing.png) top center no-repeat;
+	width:100%;
+	height:22px;
+	margin:auto;
+	padding:0;
+	overflow:visible;
+}
+.icing1
+{
+	background:url(images/leftcap.png) top left no-repeat;
+	width:100%;
+	height:22px;
+	padding:0px;
+}
+.icing2
+{
+	background:url(images/rightcap.png) top right no-repeat;
+	width:100%;
+	height:22px;
+}
 .tier
 {
   background:url(images/tierside.png) 5% -40px repeat-y,
