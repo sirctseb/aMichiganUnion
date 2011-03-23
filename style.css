@@ -43,7 +43,8 @@ p.bridal
 	height:125px;
 	background:url(images/caketoppers.png) top center no-repeat;*/
 }
-.icing
+/* original icing css, but IE doesn't support multiple backgrounds */
+/*.icing
 {
   background:
             url(images/leftcap.png) top left no-repeat,
@@ -53,8 +54,8 @@ p.bridal
   height:22px;
   margin-left:auto;
   margin-right:auto;
-}
-.icing0
+}*/
+.icing
 {
 	background:url(images/icing.png) top center no-repeat;
 	width:100%;
@@ -63,20 +64,21 @@ p.bridal
 	padding:0;
 	overflow:visible;
 }
-.icing1
+.icingleft
 {
 	background:url(images/leftcap.png) top left no-repeat;
 	width:100%;
 	height:22px;
 	padding:0px;
 }
-.icing2
+.icingright
 {
 	background:url(images/rightcap.png) top right no-repeat;
 	width:100%;
 	height:22px;
 }
-.tier
+/* original tier css, but IE doesn't support multiple backgrounds */
+/*.tier
 {
   background:url(images/tierside.png) 5% -40px repeat-y,
             url(images/tierside.png) 95% 0px repeat-y;
@@ -84,6 +86,19 @@ p.bridal
   margin-left:auto;
   margin-right:auto;
   cursor:pointer;
+}*/
+.tier
+{
+	background:url(images/tierside.png) 5% -40px repeat-y;
+	height:100px;
+	margin:auto;
+	cursor:pointer;
+}
+.tierinner
+{
+	background:url(images/tierside.png) 95% 0px repeat-y;
+	height:100%;
+	width:100%;
 }
 .tiercontent
 {

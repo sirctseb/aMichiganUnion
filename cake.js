@@ -35,15 +35,15 @@
         // close all other tiers
         $(".tier").not(this).cake('close').size();
         // hide label
-		this.children('.tierlabel').hide();
+		this.find('.tierlabel').hide();
         // widen tier
         this.animate(
-		{width:'1000px', height:'' + this.children(".tiercontent").height() + 'px'},
+		{width:'1000px', height:'' + this.find(".tiercontent").height() + 'px'},
 		{
 			duration: 500,
 			// show contents once open
 			complete: function(){
-				$(this).children(".tiercontent").fadeIn();
+				$(this).find(".tiercontent").fadeIn();
 			},
 			queue:true
 		});
@@ -70,8 +70,8 @@
 				return;
 			var thiswidth = 160 + $this.data('cake').level * 40;
 			var nextwidth = thiswidth + 40;
-			$this.children(".tiercontent").fadeOut();
-			$this.children(".tierlabel").show();
+			$this.find(".tiercontent").fadeOut();
+			$this.find(".tierlabel").show();
 			// shrink tier
 			$this.animate({
 				width: "" + thiswidth + "px",
