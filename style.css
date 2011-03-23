@@ -1,6 +1,13 @@
 .centered
   {/*text-align:center;*/}
-
+body
+{
+	background:url(images/leftbackground.png) top left no-repeat fixed;
+}
+#outmostwrapper
+{
+	background:url(images/rightbackground.png) top right no-repeat fixed;
+}
 .disabled
 {
 	display:none;
@@ -89,7 +96,7 @@ p.bridal
 }*/
 .tier
 {
-	background:url(images/tierside.png) 5% -40px repeat-y;
+	background:#FFFFFF url(images/tierside.png) 5% -40px repeat-y;
 	height:100px;
 	margin:auto;
 	cursor:pointer;
