@@ -8,6 +8,8 @@ function init() {
   $("#tier2").cake({level:2});
   $("#tier3").cake({level:3});
   $("#tier4").cake({level:4});
+  $("#tier5").cake({level:5});
+  $("#tier6").cake({level:6});
   //$("#tier1").click(openpics);
   $(".tiercontent").click(function(event) {event.stopPropagation();});
 }
