@@ -1,20 +1,25 @@
 .centered
   {/*text-align:center;*/}
+/* two elements to do two backgrounds */
 body
 {
 	background:url(images/leftbackground.png) top left no-repeat fixed;
 }
 #outmostwrapper
 {
-	background:url(images/rightbackground.png) top right no-repeat fixed;
+  margin-left:auto;
+  margin-right:auto;
+  background:url(images/rightbackground.png) top right no-repeat fixed;
 }
 .disabled
 {
 	display:none;
 }
+/* bridal party tier stuff*/
 p.bridal
 {
 }
+
 .bridal-divide
 {
 	margin-left:auto;
@@ -25,23 +30,20 @@ p.bridal
 	width:600px;
 	height:20px;
 }
+
 .bridal-right
 {
 	float:right;
 	padding:10px 0px 10px 10px;
 }
+
 .bridal-left
 {
 	float:left;
 	padding:10px 10px 10px 0px;
 }
-#outmostwrapper
-{
-  margin-left:auto;
-  margin-right:auto;
-  /*width:1024px;*/
-  /*background-color:#888888;*/
-}
+
+/* cake topper moved down a little bit to be right on the icing */
 .topper
 {
 	text-align:center;
@@ -136,6 +138,10 @@ p.bridal
 {
   width:320px;
 }
+.tier5
+{
+  width:360px;
+}
 .tierlabel
 {
   padding-top:35px;
@@ -143,6 +149,15 @@ p.bridal
   font-size:large;
   height:100%;
   cursor:pointer;
+  color:#7300C4;
+  font-style:italic;
+}
+
+/* Mad lib styles */
+.madlib p
+{
+	/* text white to start so you can't see it */
+	color:#FFFFFF;
 }
 
 .clear
