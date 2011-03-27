@@ -1,5 +1,9 @@
 .centered
-  {/*text-align:center;*/}
+  { margin-left:auto; margin-right:auto; display:block;}
+.card
+{
+  text-align:center;
+}
 /* two elements to do two backgrounds */
 body
 {
@@ -48,11 +52,11 @@ p.bridal
 {
 	margin-left:auto;
 	margin-right:auto;
-	clear:both;
-	/* todo: background image and width/height */
 	background: url(images/icing.png) top center no-repeat;
 	width:640px;
 	height:20px;
+	margin-top:20px;
+	margin-bottom:20px;
 }
 
 /* cake topper moved down a little bit to be right on the icing */
@@ -157,6 +161,10 @@ p.bridal
 .tier6
 {
   width:400px;
+}
+.tier7
+{
+  width:440px;
 }
 .tierlabel
 {
