@@ -4,12 +4,19 @@
     
     var methods = {
       init: function (options) {
+      	
+      	// tiers in the same call get sequential levels
+      	var level = 1;
+      	
         var returnval = this.each(function() {
+          // default settings
           var settings = {
-            level: 1,
+            level: level,
             state: 'closed'
           }
+          // supplement with supplied settings
           $.extend(settings, options);
+          
           var $this = $(this),
               data = $this.data('cake');
 
@@ -19,6 +26,9 @@
 			// add level and open/close state to body section of cake
             $this.data('cake', {level:settings.level, state:settings.state});
           }
+          
+          // increment level
+          level = level + 1;
           
         });
       },
