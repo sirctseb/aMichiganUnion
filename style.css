@@ -182,10 +182,25 @@ p.bridal
 }
 
 /* Mad lib styles */
-.madlib p
+.madlib
 {
 	/* text white to start so you can't see it */
 	color:#FFFFFF;
+}
+.entry
+{
+	/* TODO center placeholder */
+	text-align: center;
+}
+.ref
+{
+	border: none;
+}
+.entryfilled
+{
+	border-width:0 0 1px 0;
+	border-bottom-color: black;
+	border-bottom-style: solid;
 }
 
 .clear
