@@ -8,7 +8,8 @@ function init() {
  
   $(".tiercontent").click(function(event) {event.stopPropagation();});	
   var test="This is a test ~(pos|1|verb|)~ and a second test ~(pos|2|adjective|)~ and now we test the last thing ~(ref|2|)~";
-  $(".madlib").madlib({description:test});
+  //$(".madlib").madlib({description:test});
+  $(".madlib").madlib({name:"test"});
 }
 
 function resolve() {
