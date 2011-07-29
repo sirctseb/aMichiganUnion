@@ -1,5 +1,5 @@
 (function($) {
-	// build the tier
+
 	$.fn.madlib = function(method) {
 
 		var methods = {
@@ -7,39 +7,33 @@
 
 				var returnval = this.each(function() {
 
-					// default settings
-					/*var settings = {
-					level: level,
-					state: 'closed'
-					}*/
-					// supplement with supplied settings
-					//$.extend(settings, options);
-
 					var $this = $(this), data = $this.data('madlib');
 
 					if(!data) {
-						//$this.bind('click.cake', methods.toggle);
 
-						// add level and open/close state to body section of cake
-						//$this.data('cake', {level:settings.level, state:settings.state});
+						// mark initialized
 						$this.data('madlib', {
 							init : true
 						});
 
-						if(options.name) {
+						// if contents exists on options, it is a full model
+						if(options.contents) {
+							$this.madlib("build", options);
+							
+						// otherwise, it's just the name and we have to load it
+						} else if(options.name) {
 							$.getJSON("http://localhost:8085/load?jsoncallback=?", {
 								name : options.name
 							}, function(data) {
 								if(data.status == "success") {
-									$this.madlib("build", data.model.contents);
+									$this.madlib("build", data.model);
+									// TODO i don't think jquery 1.5 likes empty each
 									//$.publish("madlibLoaded", [data.name]);
 								} else {
 									// TODO i don't think jquery 1.5 likes empty each
 									//$.publish("loadFailedNotFound");
 								}
 							});
-						} else if(options.description) {
-							$this.madlib("build", options.description);
 						}
 					}
 
@@ -48,57 +42,93 @@
 			// $(this) because it is a response to a js event
 			resolve : function() {
 				// call $this the madlib
-				$this = $(this).parent();
-				
+				//$this = $(this).parent();
+
 				// TODO animate
 				// show regular text
-				$this.css({
+				this.css({
 					color : "#000000"
 				});
-				
+
 				// fill reference fields with contents of referant inputs
-				$this.find(".ref").each(function filltext() {
+				this.find(".ref").each(function filltext() {
 					$(this).val($(this).siblings('[entryno="' + $(this).attr("refno") + '"]').val());
 				});
-				
 				// modify css of entry fields
-				$this.find(".entry").addClass("entryfilled");
+				this.find(".entry").addClass("entryfilled");
 			},
-			build : function(description) {
-				
-				$this = this;
-				
+			build : function(model) {
+				//$this = this;
+
+				// store name
+				$.extend(this.data('madlib'), {
+					name : model.name
+				});
+
+				// TODO likes / dislikes
+
 				// add madlib class in case it doesn't have it yet
-				$this.addClass("madlib");
-				
+				this.addClass("madlib");
+
 				// regex for identifying references
 				var refexp = /\(ref\|\d+\|\)/g;
 				// regex for identifying input fields
-				var posexp = /\(pos\|\d+\|[A-z]+\|\)/g;
-				
+				//var posexp = /\(pos\|\d+\|[A-z]+\|\)/g;
+				var posexp = /\(pos\|\d+\|[^|]+\|\)/g;
+
 				// split string on tilde character
-				var components = description.split("~");
-				
+				var components = model.contents.split("~");
+
 				// check each section for references or input field markers
 				for(var component in components) {
-					
+
 					if(posexp.test(components[component])) {
 						// add input field
-						$this.append($('<input class="entry" type="text" entryno="' + components[component].split("|")[1] + '" placeholder="' + components[component].split("|")[2] + '" />)'));
+						this.append($('<input class="entry pos" type="text" entryno="' + components[component].split("|")[1] + '" placeholder="' + components[component].split("|")[2] + '" />)'));
 					} else if(refexp.test(components[component])) {
 						// add reference field
-						$this.append($('<input class="entry ref" type="text" refno="' + components[component].split("|")[1] + '" />)'));
+						this.append($('<input class="entry ref" type="text" refno="' + components[component].split("|")[1] + '" />)'));
 					} else {
 						// append normal text
-						$this.append(components[component]);
+						this.append(components[component]);
 					}
 				}
-				
+
 				// separate button - will probably change when we make this prettier
-				$this.append($('<br />'));
-				
+				this.append($('<br />'));
+
+				// so we can refer to this in event handlers
+				var $this = this;
+
 				// make button and bind to resolve method
-				$('<input type="button" value="go" />').bind('click.madlib', methods.resolve).appendTo($this);
+				$('<input type="button" value="go" />').bind('click.madlib', function() {$this.madlib('resolve');}).appendTo(this);
+
+				// make submit button and bind to submit method
+				$('<input type="button" value="submit" />').bind('click.madlib', function() {$this.madlib('submit');}).appendTo(this);
+			},
+			submit : function() {
+				// check that we know where to submit to
+				if(this.data('madlib').name) {
+
+					// get array of entries
+					var entries = [];
+					this.children(".pos").each(function() {
+						entries.push($(this).val());
+					});
+					// submit to database
+					$.getJSON("http://localhost:8085/submit?jsoncallback=?", {
+						name : this.data('madlib').name,
+						entries : entries
+					}, function(data) {
+						if(data.success) {
+							// TODO notify success
+						} else {
+							// TODO notify fail
+						}
+					});
+				} else {
+					// $.publish("error: no name on madlib");
+				}
 			}
 		};
 
