@@ -1,3 +1,13 @@
+// TODO put somewhere better
+$.replace = function(string, obj) {
+	$.each(obj,
+		function(index, item) {
+		 string = string.replace(index,item);
+		}
+	);
+	return string;
+}
+
 function init() {
 	$("#slider").nivoSlider({
 		manualAdvance : true,
@@ -16,6 +26,25 @@ function init() {
 		name : "Save The Date"
 	});*/
 
+	// TODO testing live
+	// NOTE works
+	//$('.madlib').live('mouseover', function() { alert('omg');});
+
+	$.subscribe('likeschanged', function(data) {
+		// push likes from data to title of each madlib
+		$('.madlib').each(function(index, element) {
+			var $madlib = $(element);
+			// get title h3
+			//var $title = $madlib.closest("h3");
+			var $title = $madlib.parent().prev();
+			// set likes in title
+			$title.find('.madliblikes').text($madlib.data('madlib').likes);
+			// set dislikes in title
+			$title.find('.madlibdislikes').text($madlib.data('madlib').dislikes);
+		});
+	});
+
+	// TODO this should probably go into a plugin of its own or something
 	// get madlib data
 	$.getJSON("http://localhost:8085/loadAll?jsoncallback=?", function(data) {
 		if(data.status == "success") {
@@ -24,9 +53,24 @@ function init() {
 			$.each(data.models, function(index, model) {
 				// build accordion semantics
 				// put in header
-				$("<h3><a href='#'>" + model.name + "</a></h3>").appendTo($("#madlibaccordion"));
+				var headerString =
+				"<h3><a href='#'>modelname" +
+				"<span class='madliblikeslabel'>Likes:<span class='madliblikes'>modellikes</span></span>" +
+				"<span class='madliblikeslabel'>Dislikes:<span class='madlibdislikes'>modeldislikes</span></span>" +  
+				 "</a>" + 
+				 "</h3>";
+				// replace with values
+				var filledString = $.replace(headerString, {"modelname": model.name, "modellikes": model.likes, "modeldislikes": model.dislikes});
+				// add to accordion
+				$(filledString).appendTo($("#madlibaccordion"));
+				
 				// put in body
-				$("<div id='madlibwrapper" + index + "'><div class='madlib' id='madlib" + index + "'></div></div>").appendTo($("#madlibaccordion"));
+				// TODO replace values like above
+				$("<div id='madlibwrapper" + index + "'>" + 
+					"<div class='madlib' id='madlib" + index + "'></div>" +
+					"</div>").appendTo($("#madlibaccordion"));
+				/*$("<span class='madliblikes'>" + model.likes + "</span>" +
+					"<span class='madlibdislikes'>" + model.dislikes + "</span>").appendTo($("#madlibwrapper" + index));*/
 				
 				// build madlib in new body
 				$("#madlib" + index).madlib(model);
@@ -77,6 +121,24 @@ function init() {
 		} else {
 			// $.publish("fail: could not load madlibs");
 		}
+		
+		// TODO i would rather have done this with live, but it wouldn't work
+		// set up handlers for like buttons
+		$('.madliblikes').bind('click', function() {
+			$(this).closest('h3')			// go up to the h3 header
+					.next()					// go to madlibwrapper next to title
+					.children('.madlib')	// get actual madlib
+					//.siblings('.madlib')
+					.first().madlib('like', {like: true});	// call like method
+		});
+		// set up handlers for dislike buttons
+		$('.madlibdislikes').bind('click', function() {
+			$(this).closest('h3')			// go up to the h3 header
+					.next()					// go to madlibwrapper next to title
+					.children('.madlib')	// get actual madlib
+					//.siblings('.madlib')
+					.madlib('like',{like: false});	// call like method
+		});
 	});
 }
 

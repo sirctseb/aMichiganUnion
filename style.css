@@ -195,6 +195,14 @@ p.bridal
 	/* text white to start so you can't see it */
 	color:#FFFFFF;
 }
+.madliblikeslabel
+{
+	margin-left:15px;
+}
+.madliblikes, .madlibdislikes
+{
+	margin-left:4px;
+}
 .entry
 {
 	/* TODO center placeholder */

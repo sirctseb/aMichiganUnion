@@ -60,9 +60,11 @@
 			build : function(model) {
 				//$this = this;
 
-				// store name
+				// store name and likes / dislikes
 				$.extend(this.data('madlib'), {
-					name : model.name
+					name : model.name,
+					likes : model.likes,
+					dislikes : model.dislikes
 				});
 
 				// TODO likes / dislikes
@@ -133,6 +135,24 @@
 					});
 				} else {
 					// $.publish("error: no name on madlib");
+				}
+			},
+			like : function(options) {
+				var name = this.data("madlib").name;
+				var $madlib = this;
+				if(name) {
+					$.getJSON("http://localhost:8085/like?jsoncallback=?",
+						{name:name, like:options.like},
+						function(data) {
+							// TODO disable like button or something
+							if(options.like) {
+								$madlib.data('madlib').likes += 1;
+							} else {
+								$madlib.data('madlib').dislikes += 1;
+							}
+							$.publish('likeschanged', []);
+						}
+					)
 				}
 			}
 		};
