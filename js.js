@@ -39,14 +39,14 @@ function init() {
 							"<div class='subproperty subname'>Name</div></div>")
 							.appendTo("#madlibwrapper" + modelkey);
 					
-					for(var submission in subdata.submissions) {
+					$.each(subdata.submissions, function(subindex, submission) {
 						// build submission list
-						$("<div><span class='subproperty subdate clearleft'>" + subdata.submissions[submission].date +"</span>"+
-								"<span class='subproperty sublikes'>" + subdata.submissions[submission].likes + "</span>" +
-								"<span class='subproperty subdislikes'>" + subdata.submissions[submission].dislikes + "</span>" +
-								"<span class='subproperty subname'>" + subdata.submissions[submission].username + "</span></div>")
+						$("<div><span class='subproperty subdate clearleft'>" + submission.date +"</span>"+
+								"<span class='subproperty sublikes'>" + submission.likes + "</span>" +
+								"<span class='subproperty subdislikes'>" + submission.dislikes + "</span>" +
+								"<span class='subproperty subname'>" + submission.username + "</span></div>")
 								.appendTo($("#madlibwrapper" + modelkey));
-					}
+					});
 				}
 
 				// load top submissions
@@ -62,7 +62,6 @@ function init() {
 							{name: model.name},
 							function(subdata) {
 								buildSubList(subdata, index);
-								//$("#madlibwrapper" + index).append("shutup");
 							});
 				});
 			
