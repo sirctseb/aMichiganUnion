@@ -103,6 +103,9 @@
 				// make button and bind to resolve method
 				$('<input type="button" value="go" />').bind('click.madlib', function() {$this.madlib('resolve');}).appendTo(this);
 
+				// make name field that people can fill if they want
+				$('<input type="text" name="username" placeholder="Anonymous" />').appendTo(this);
+				
 				// make submit button and bind to submit method
 				$('<input type="button" value="submit" />').bind('click.madlib', function() {$this.madlib('submit');}).appendTo(this);
 			},
@@ -115,10 +118,12 @@
 					this.children(".pos").each(function() {
 						entries.push($(this).val());
 					});
+					//alert(this.children(':input[name="username"]').val());
 					// submit to database
 					$.getJSON("http://localhost:8085/submit?jsoncallback=?", {
 						name : this.data('madlib').name,
-						entries : entries
+						entries : entries,
+						username : this.children(':input[name="username"]').val()
 					}, function(data) {
 						if(data.success) {
 							// TODO notify success
