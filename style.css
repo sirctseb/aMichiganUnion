@@ -257,10 +257,10 @@ p.bridal
 .go-button
 {
 	/* TODO big flat gray style */
-	width:70px;
+	/*width:70px;
 	height:30px;
 	background-color:#DEDEDE;
-	border-width:1px;
+	border-width:1px;*/
 	
 	
 	/* TODO trying to center, had to use go-div */
@@ -291,7 +291,7 @@ p.bridal
 {
 	display:block;
 	float:left;
-	text-align: center;
+	/*text-align: center;*/
 }
 .subdate
 {

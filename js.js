@@ -81,8 +81,8 @@ function init() {
 				// put in submissions div
 				var $sublist = $("<div class='submissionslist' id='submissions" + index + "'>" +
 								"See other people's entries (spoiler alert!):</div>")
-								//.appendTo($("#madlibwrapper" + index));
-								.appendTo('body');
+								.appendTo($("#madlibwrapper" + index));
+								//.appendTo('body');
 								
 				// build tabs semantics
 				var tabtitletemplate = "<li><a href='#tabhref'>tabtitle</a></li>";
@@ -94,8 +94,8 @@ function init() {
 				$($.replace(tabtitletemplate, {'tabhref': 'topsubs' + index, 'tabtitle': 'Top'})).appendTo($subtabul);
 				
 				// add content elements
-				$($.replace(tabcontenttemplate, {'tabhref': 'newsubs' + index, 'tabcontent': 'new content'})).insertAfter($subtabul)
-					.after($($.replace(tabcontenttemplate, {'tabhref': 'topsubs' + index, 'tabcontent': 'top content'})));
+				$($.replace(tabcontenttemplate, {'tabhref': 'newsubs' + index, 'tabcontent': ''})).insertAfter($subtabul)
+					.after($($.replace(tabcontenttemplate, {'tabhref': 'topsubs' + index, 'tabcontent': ''})));
 				
 				var buildSubList = function(subdata, modelkey) {
 					// put headers in
@@ -106,8 +106,8 @@ function init() {
 							"<div class='subproptitle subproperty subdate'>Date</div>" +
 							"</div>")
 							//.appendTo($sublist);
-							//.appendTo($('#' + subdata.href + modelkey + ' p'));
-							;
+							.appendTo($('#' + subdata.href + modelkey + ' p'));
+							//;
 					
 					$.each(subdata.submissions, function(subindex, submission) {
 						// build submission list
@@ -118,8 +118,8 @@ function init() {
 								"<span class='subproperty subdate'>" + submission.date + "</span>"+
 								"</div>")
 								//.appendTo($sublist);
-								//.appendTo($('#' + subdata.href + modelkey + ' p'));
-								;
+								.appendTo($('#' + subdata.href + modelkey + ' p'));
+								//;
 								
 						// store submission data
 						$("#submission-" + modelkey + "-" + subindex).data('madlib', submission.entries);
