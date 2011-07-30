@@ -110,7 +110,7 @@
 				var $this = this;
 
 				// make wrapper for centering
-				var $godiv = $('<div class="go-div"></div>').appendTo(this);
+				var $godiv = $('<p class="go-div"></p>').appendTo(this);
 				
 				// make button and bind to resolve method
 				$('<input class="go-button" type="button" value="go" />')

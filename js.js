@@ -56,8 +56,8 @@ function init() {
 				// put in header
 				var headerString =
 				"<h3><a href='#'>modelname" +
-				"<span class='madliblikeslabel'>Likes:<span class='madliblikes'>modellikes</span></span>" +
-				"<span class='madliblikeslabel'>Dislikes:<span class='madlibdislikes'>modeldislikes</span></span>" +  
+				"<span class='madliblikessection'><span title='Click to like' class='madliblikeslabel'>Like</span> (<span class='madliblikes'>modellikes</span>)</span>" +
+				//"<span class='madliblikeslabel'>Dislikes:<span class='madlibdislikes'>modeldislikes</span></span>" +  
 				 "</a>" + 
 				 "</h3>";
 				// replace with values
@@ -86,7 +86,7 @@ function init() {
 								
 				// build tabs semantics
 				var tabtitletemplate = "<li><a href='#tabhref'>tabtitle</a></li>";
-				var tabcontenttemplate = "<div id='tabhref'><p>tabcontent</p></div>";
+				var tabcontenttemplate = "<div id='tabhref'><p class='tab-content'>tabcontent</p></div>";
 				
 				// add ul and titles
 				var $subtabul = $("<ul></ul>").appendTo($sublist);
@@ -102,7 +102,7 @@ function init() {
 					$("<div>" + 
 							"<div class='subproptitle subproperty subname clearleft'>Name</div>" +
 							"<div class='subproptitle subproperty sublikes'>Likes</div>" +
-							"<div class='subproptitle subproperty subdislikes'>Dislikes</div>" +
+							//"<div class='subproptitle subproperty subdislikes'>Dislikes</div>" +
 							"<div class='subproptitle subproperty subdate'>Date</div>" +
 							"</div>")
 							//.appendTo($sublist);
@@ -114,7 +114,7 @@ function init() {
 						$("<div class='submission clearleft' id='submission-" + modelkey + "-" + subindex + "'>" +
 								"<span class='subproperty subname'>" + submission.username + "</span>" +
 								"<span class='subproperty sublikes'>" + submission.likes + "</span>" +
-								"<span class='subproperty subdislikes'>" + submission.dislikes + "</span>" +
+								//"<span class='subproperty subdislikes'>" + submission.dislikes + "</span>" +
 								"<span class='subproperty subdate'>" + submission.date + "</span>"+
 								"</div>")
 								//.appendTo($sublist);
@@ -143,11 +143,13 @@ function init() {
 							
 				//var localModel = index;
 				// load new submissions
-				$.getJSON("http://localhost:8085/newSubmissions?jsoncallback=?",
+				$.getJSON("http://localhost:8085/newTopSubmissions?jsoncallback=?",
 							{name: model.name},
 							function(subdata) {
-								buildSubList($.extend(subdata, {'href': 'newsubs'}), index);
+								buildSubList($.extend({}, subdata.newSubmissions, {'href': 'newsubs'}), index);
+								buildSubList($.extend({}, subdata.topSubmissions, {'href': 'topsubs'}), index);
 								// build tabs
+								// TODO this could actually go before the data load
 								$('#submissions' + index).tabs();
 							});
 				});
@@ -168,7 +170,7 @@ function init() {
 		
 		// TODO i would rather have done this with live, but it wouldn't work
 		// set up handlers for like buttons
-		$('.madliblikes').bind('click', function() {
+		$('.madliblikessection').bind('click', function() {
 			$(this).closest('h3')			// go up to the h3 header
 					.next()					// go to madlibwrapper next to title
 					.children('.madlib')	// get actual madlib
@@ -176,13 +178,13 @@ function init() {
 					.first().madlib('like', {like: true});	// call like method
 		});
 		// set up handlers for dislike buttons
-		$('.madlibdislikes').bind('click', function() {
+		/*$('.madlibdislikes').bind('click', function() {
 			$(this).closest('h3')			// go up to the h3 header
 					.next()					// go to madlibwrapper next to title
 					.children('.madlib')	// get actual madlib
 					//.siblings('.madlib')
 					.madlib('like',{like: false});	// call like method
-		});
+		});*/
 	});
 }
 

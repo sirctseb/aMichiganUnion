@@ -206,13 +206,19 @@ p.bridal
 {
 	color:#000;
 }
+.madliblikessection
+{
+	float:right;
+}
 .madliblikeslabel
 {
-	margin-left:15px;
+	/*margin-left:15px;*/
+	text-decoration: underline;
 }
 .madliblikes, .madlibdislikes
 {
-	margin-left:4px;
+	/*margin-left:4px;*/
+	text-decoration: none;
 }
 .entry
 {
@@ -278,6 +284,12 @@ p.bridal
 .save-paragraph
 {
 	display:none;
+}
+.tab-content
+{
+	max-height: 100px;
+	/*height:20px;*/
+	overflow: auto;
 }
 .submission
 {
