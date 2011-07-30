@@ -30,6 +30,14 @@
           // increment level
           level = level + 1;
           
+          // subscribe to tier-resizing events
+          $.subscribe('tier-resize', function(tier) {
+          	// if the tier is open, call open again so it resizes correctly
+          	if(tier.data('cake').state == 'open') {
+          		tier.cake('open');
+          	}
+          });
+          
         });
       },
       // $(this) because it is a response to a js event

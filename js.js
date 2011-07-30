@@ -79,8 +79,23 @@ function init() {
 				// TODO jqueryui tabs for top vs. newest submissions
 				
 				// put in submissions div
-				var $sublist = $("<div class='submissionslist' id='#submissions" + index + "'>" +
-								"See other people's entries:</div>").appendTo($("#madlibwrapper" + index));
+				var $sublist = $("<div class='submissionslist' id='submissions" + index + "'>" +
+								"See other people's entries (spoiler alert!):</div>")
+								//.appendTo($("#madlibwrapper" + index));
+								.appendTo('body');
+								
+				// build tabs semantics
+				var tabtitletemplate = "<li><a href='#tabhref'>tabtitle</a></li>";
+				var tabcontenttemplate = "<div id='tabhref'><p>tabcontent</p></div>";
+				
+				// add ul and titles
+				var $subtabul = $("<ul></ul>").appendTo($sublist);
+				$($.replace(tabtitletemplate, {'tabhref': 'newsubs' + index, 'tabtitle': 'New'})).appendTo($subtabul);
+				$($.replace(tabtitletemplate, {'tabhref': 'topsubs' + index, 'tabtitle': 'Top'})).appendTo($subtabul);
+				
+				// add content elements
+				$($.replace(tabcontenttemplate, {'tabhref': 'newsubs' + index, 'tabcontent': 'new content'})).insertAfter($subtabul)
+					.after($($.replace(tabcontenttemplate, {'tabhref': 'topsubs' + index, 'tabcontent': 'top content'})));
 				
 				var buildSubList = function(subdata, modelkey) {
 					// put headers in
@@ -90,7 +105,9 @@ function init() {
 							"<div class='subproptitle subproperty subdislikes'>Dislikes</div>" +
 							"<div class='subproptitle subproperty subdate'>Date</div>" +
 							"</div>")
-							.appendTo($sublist);
+							//.appendTo($sublist);
+							//.appendTo($('#' + subdata.href + modelkey + ' p'));
+							;
 					
 					$.each(subdata.submissions, function(subindex, submission) {
 						// build submission list
@@ -100,7 +117,9 @@ function init() {
 								"<span class='subproperty subdislikes'>" + submission.dislikes + "</span>" +
 								"<span class='subproperty subdate'>" + submission.date + "</span>"+
 								"</div>")
-								.appendTo($sublist);
+								//.appendTo($sublist);
+								//.appendTo($('#' + subdata.href + modelkey + ' p'));
+								;
 								
 						// store submission data
 						$("#submission-" + modelkey + "-" + subindex).data('madlib', submission.entries);
@@ -115,7 +134,6 @@ function init() {
 					});
 				}
 				
-
 				// load top submissions
 				/*$.getJSON("http://localhost:8085/topSubmissions?jsoncallback=?",
 							{name: data.models[index].name},
@@ -128,7 +146,9 @@ function init() {
 				$.getJSON("http://localhost:8085/newSubmissions?jsoncallback=?",
 							{name: model.name},
 							function(subdata) {
-								buildSubList(subdata, index);
+								buildSubList($.extend(subdata, {'href': 'newsubs'}), index);
+								// build tabs
+								$('#submissions' + index).tabs();
 							});
 				});
 			
@@ -137,7 +157,8 @@ function init() {
 											header: "h3",
 											change: function(event, ui) {
 															//$(".madlibtier").css({height:$("#madlibaccordion").outerHeight()});
-															$(".madlibtier").cake("open"); 
+															//$(".madlibtier").cake("open");
+															$.publish("tier-resize", [$('.madlibtier')]);
 														}
 											});
 			

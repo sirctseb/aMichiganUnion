@@ -39,7 +39,7 @@
 
 				});
 			},
-			// $(this) because it is a response to a js event
+			// show the filled-in madlib
 			resolve : function() {
 				// call $this the madlib
 				//$this = $(this).parent();
@@ -49,7 +49,8 @@
 				/*this.css({
 					color : "#000000"
 				});*/
-				this.find('.madlibtext').css({color : "#000"});
+				//this.find('.madlibtext').css({color : "#000"});
+				this.find('.madlibtext').addClass('madlibtextfilled');
 
 				// fill reference fields with contents of referant inputs
 				this.find(".ref").each(function filltext() {
@@ -108,12 +109,32 @@
 				// so we can refer to this in event handlers
 				var $this = this;
 
+				// make wrapper for centering
+				var $godiv = $('<div class="go-div"></div>').appendTo(this);
+				
 				// make button and bind to resolve method
-				$('<div class="go-div"><input class="go-button" type="button" value="go" /></div>').bind('click.madlib', function() {$this.madlib('resolve');}).appendTo(this);
+				$('<input class="go-button" type="button" value="go" />')
+					.bind('click.madlib',
+						function() {
+							$this.madlib('resolve');
+							$this.find('.save-paragraph').slideDown(
+								function() {
+									$.publish('tier-resize', [$('.madlibtier')]);
+								});
+						})
+					.appendTo($godiv);
+				// make reset button
+				$('<input class="reset-button" type="button" value="reset" />')
+					.bind('click.madlib',
+						function() {
+							$this.find('.entry').val("").removeClass('entryfilled');
+							$this.find('.madlibtext').removeClass('madlibtextfilled');
+						})
+					.appendTo($godiv);
 				
 				// TODO separation between sections
 				
-				this.append($('<br />'));
+				//this.append($('<br />'));
 
 				// make name field that people can fill if they want
 				$('<p class="save-paragraph">Save it so other people can see:<br />' +

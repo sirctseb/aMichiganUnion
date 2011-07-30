@@ -202,6 +202,10 @@ p.bridal
 	/* looks stupid */
 	/*border-bottom: 1px dashed #BBBBBB;*/
 }
+.madlibtextfilled
+{
+	color:#000;
+}
 .madliblikeslabel
 {
 	margin-left:15px;
@@ -270,6 +274,10 @@ p.bridal
 .indent
 {
 	margin-left:20px;
+}
+.save-paragraph
+{
+	display:none;
 }
 .submission
 {
