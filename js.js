@@ -45,6 +45,7 @@ function init() {
 	});
 
 	// TODO this should probably go into a plugin of its own or something
+	// TODO just put this in madlib plugin
 	// get madlib data
 	$.getJSON("http://localhost:8085/loadAll?jsoncallback=?", function(data) {
 		if(data.status == "success") {
@@ -66,7 +67,7 @@ function init() {
 				
 				// put in body
 				// TODO replace values like above
-				$("<div id='madlibwrapper" + index + "'>" + 
+				$("<div class='madlibwrapper' id='madlibwrapper" + index + "'>" + 
 					"<div class='madlib' id='madlib" + index + "'></div>" +
 					"</div>").appendTo($("#madlibaccordion"));
 				/*$("<span class='madliblikes'>" + model.likes + "</span>" +
@@ -75,23 +76,45 @@ function init() {
 				// build madlib in new body
 				$("#madlib" + index).madlib(model);
 				
+				// TODO jqueryui tabs for top vs. newest submissions
+				
+				// put in submissions div
+				var $sublist = $("<div class='submissionslist' id='#submissions" + index + "'>" +
+								"See other people's entries:</div>").appendTo($("#madlibwrapper" + index));
+				
 				var buildSubList = function(subdata, modelkey) {
 					// put headers in
-					$("<div><div class='subproperty subdate clearleft'>Date</div>" +
-							"<div class='subproperty sublikes'>Likes</div>" +
-							"<div class='subproperty subdislikes'>Dislikes</div>" + 
-							"<div class='subproperty subname'>Name</div></div>")
-							.appendTo("#madlibwrapper" + modelkey);
+					$("<div>" + 
+							"<div class='subproptitle subproperty subname clearleft'>Name</div>" +
+							"<div class='subproptitle subproperty sublikes'>Likes</div>" +
+							"<div class='subproptitle subproperty subdislikes'>Dislikes</div>" +
+							"<div class='subproptitle subproperty subdate'>Date</div>" +
+							"</div>")
+							.appendTo($sublist);
 					
 					$.each(subdata.submissions, function(subindex, submission) {
 						// build submission list
-						$("<div><span class='subproperty subdate clearleft'>" + submission.date +"</span>"+
+						$("<div class='submission clearleft' id='submission-" + modelkey + "-" + subindex + "'>" +
+								"<span class='subproperty subname'>" + submission.username + "</span>" +
 								"<span class='subproperty sublikes'>" + submission.likes + "</span>" +
 								"<span class='subproperty subdislikes'>" + submission.dislikes + "</span>" +
-								"<span class='subproperty subname'>" + submission.username + "</span></div>")
-								.appendTo($("#madlibwrapper" + modelkey));
+								"<span class='subproperty subdate'>" + submission.date + "</span>"+
+								"</div>")
+								.appendTo($sublist);
+								
+						// store submission data
+						$("#submission-" + modelkey + "-" + subindex).data('madlib', submission.entries);
+						
+						// (try to) set up handler for submission clicks
+						// TODO do this once for all of them 
+						$('#submission-' + modelkey + '-' + subindex).click( function(event) {
+						//$('.subdate').click(function(event) {
+							//alert('omg');
+							$(this).closest('.madlibwrapper').children('.madlib').madlib('fill', $(this).data('madlib'));
+						});
 					});
 				}
+				
 
 				// load top submissions
 				/*$.getJSON("http://localhost:8085/topSubmissions?jsoncallback=?",

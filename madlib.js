@@ -46,9 +46,10 @@
 
 				// TODO animate
 				// show regular text
-				this.css({
+				/*this.css({
 					color : "#000000"
-				});
+				});*/
+				this.find('.madlibtext').css({color : "#000"});
 
 				// fill reference fields with contents of referant inputs
 				this.find(".ref").each(function filltext() {
@@ -71,6 +72,11 @@
 
 				// add madlib class in case it doesn't have it yet
 				this.addClass("madlib");
+				
+				// add paragraph for text
+				this.append($("<p class='madlibcontents'></p>"));
+				// get reference to paragraph
+				var text = this.children('p');
 
 				// regex for identifying references
 				var refexp = /\(ref\|\d+\|\)/g;
@@ -86,30 +92,36 @@
 
 					if(posexp.test(components[component])) {
 						// add input field
-						this.append($('<input class="entry pos" type="text" entryno="' + components[component].split("|")[1] + '" placeholder="' + components[component].split("|")[2] + '" />)'));
+						text.append($('<input class="entry pos" type="text" entryno="' + components[component].split("|")[1] + '" placeholder="' + components[component].split("|")[2] + '" />)'));
 					} else if(refexp.test(components[component])) {
 						// add reference field
-						this.append($('<input class="entry ref" type="text" refno="' + components[component].split("|")[1] + '" />)'));
+						text.append($('<input class="entry ref" type="text" refno="' + components[component].split("|")[1] + '" />)'));
 					} else {
 						// append normal text
-						this.append(components[component]);
+						text.append($("<span class='madlibtext'>" + components[component] + "</span>"));
 					}
 				}
 
 				// separate button - will probably change when we make this prettier
-				this.append($('<br />'));
+				//this.append($('<br />'));
 
 				// so we can refer to this in event handlers
 				var $this = this;
 
 				// make button and bind to resolve method
-				$('<input type="button" value="go" />').bind('click.madlib', function() {$this.madlib('resolve');}).appendTo(this);
+				$('<div class="go-div"><input class="go-button" type="button" value="go" /></div>').bind('click.madlib', function() {$this.madlib('resolve');}).appendTo(this);
+				
+				// TODO separation between sections
+				
+				this.append($('<br />'));
 
 				// make name field that people can fill if they want
-				$('<input type="text" name="username" placeholder="Anonymous" />').appendTo(this);
+				$('<p class="save-paragraph">Save it so other people can see:<br />' +
+				'<span class="indent"">Your name (optional): <input class="username-input" type="text" name="username" placeholder="Anonymous" /></span>' +
+				'</p>').appendTo(this);
 				
+				$('<input type="button" value="submit" />').bind('click.madlib', function() {$this.madlib('submit');}).appendTo(this.find('.save-paragraph'));
 				// make submit button and bind to submit method
-				$('<input type="button" value="submit" />').bind('click.madlib', function() {$this.madlib('submit');}).appendTo(this);
 			},
 			submit : function() {
 				// check that we know where to submit to
@@ -117,7 +129,7 @@
 
 					// get array of entries
 					var entries = [];
-					this.children(".pos").each(function() {
+					this.find(".pos").each(function() {
 						entries.push($(this).val());
 					});
 					//alert(this.children(':input[name="username"]').val());
@@ -125,7 +137,7 @@
 					$.getJSON("http://localhost:8085/submit?jsoncallback=?", {
 						name : this.data('madlib').name,
 						entries : entries,
-						username : this.children(':input[name="username"]').val()
+						username : this.find(':input[name="username"]').val()
 					}, function(data) {
 						if(data.success) {
 							// TODO notify success
@@ -154,6 +166,14 @@
 						}
 					)
 				}
+			},
+			fill : function(entries) {
+				// fill entry fields with supplied entries and then
+				// call resolve to fill refs and show text if it's not shown already
+				$(".pos").each(function(index, element) {
+					$(this).val(entries[parseInt($(this).attr("entryno")) - 1]);
+				});
+				this.madlib('resolve');
 			}
 		};
 
