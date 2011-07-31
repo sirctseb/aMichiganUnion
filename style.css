@@ -329,13 +329,23 @@ p.bridal
 }
 .sublikes:not(.subproptitle)
 {
-	text-decoration: underline;
+	/*text-decoration: underline;
 	color: #3333ff;
-	cursor:pointer;
+	cursor:pointer;*/
 }
 .subname
 {
 	width:150px;
+}
+.sublikelink
+{
+	float:right;
+	color:#3333ff;
+	cursor:pointer;
+}
+.sublikelink:hover
+{
+	text-decoration:underline;
 }
 .subkey
 {

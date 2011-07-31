@@ -123,37 +123,34 @@ function init() {
 					
 					$.each(subdata.submissions, function(subindex, submission) {
 						// build submission list
-						$("<div class='submission clearleft' id='submission-" + modelkey + "-" + subindex + "'>" +
+						$("<div class='submission clearleft'>" + // id='submission-" + modelkey + "-" + subindex + "'>" +
 								"<span class='subproperty subname'>" + submission.username + "</span>" +
 								"<span title='Click to like' class='subproperty sublikes'>" + submission.likes + "</span>" +
 								//"<span class='subproperty subdislikes'>" + submission.dislikes + "</span>" +
 								"<span class='subproperty subdate'>" + submission.date + "</span>"+
+								"<span title='Click to like' class='sublikelink'>Like</span>" +
 								"<span class='subkey'>" + submission.key + "</span>" +
 								"</div>")
 								//.appendTo($sublist);
 								//.appendTo($('#' + subdata.href + modelkey + ' p'));
-								.appendTo($entrylist);
-								//;
+								.appendTo($entrylist)
 								
-						// store submission data
-						$("#submission-" + modelkey + "-" + subindex).data('madlib', submission.entries);
-						
-						// (try to) set up handler for submission clicks
-						// TODO do this once for all of them 
-						$('#submission-' + modelkey + '-' + subindex).click( function(event) {
-							// call fill() on the madlib
-							$(this).closest('.madlibwrapper').children('.madlib').madlib('fill', $(this).data('madlib'));
-							// remove active class from other submissions
-							$(this).siblings('.active-submission').removeClass('active-submission');
-							// add active class to submission
-							$(this).addClass('active-submission');
-						});
+								.data('madlib', submission.entries)
+								.click( function(event) {
+									// call fill() on the madlib
+									$(this).closest('.madlibwrapper').children('.madlib').madlib('fill', $(this).data('madlib'));
+									// remove active class from other submissions
+									$(this).siblings('.active-submission').removeClass('active-submission');
+									// add active class to submission
+									$(this).addClass('active-submission');
+								});
 					});
 				}
 
 				// load new and top submissions
 				$.getJSON("http://localhost:8085/newTopSubmissions?jsoncallback=?",
 							{name: model.name},
+							// put data into lists and build tab widget
 							function(subdata) {
 								buildSubList($.extend({}, subdata.newSubmissions, {'href': 'newsubs'}), index);
 								buildSubList($.extend({}, subdata.topSubmissions, {'href': 'topsubs'}), index);
@@ -163,8 +160,9 @@ function init() {
 								$('#submissions' + index).tabs();
 								
 								// add like handlers to submission likes
-								$('#submissions' + index + ' .sublikes:not(.subproptitle)').click(function(event) {
-									var $submission_count = $(this);
+								//$('#submissions' + index + ' .sublikes:not(.subproptitle)').click(function(event) {
+								$('#submissions' + index + ' .sublikelink').click(function(event) {
+									var $submission_count = $(this).siblings('.sublikes');
 									$.getJSON('http://localhost:8085/likeSub?jsoncallback=?',
 												{key:$(this).siblings('.subkey').text()},
 												function(data) {
@@ -173,6 +171,7 @@ function init() {
 														$submission_count.text(data.count);
 													}
 												});
+									return false;
 								});
 							});
 				});
