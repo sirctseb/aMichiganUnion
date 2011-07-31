@@ -64,7 +64,7 @@ function init() {
 				// put in header
 				var headerString =
 				"<h3><a href='#'>modelname" +
-				"<span class='madliblikessection'><span title='Click to like' class='madliblikeslabel'>Like</span> (<span class='madliblikes'>modellikes</span>)</span>" +
+				//"<span class='madliblikessection'><span title='Click to like' class='madliblikeslabel'>Like</span> (<span class='madliblikes'>modellikes</span>)</span>" +
 				//"<span class='madliblikeslabel'>Dislikes:<span class='madlibdislikes'>modeldislikes</span></span>" +  
 				 "</a>" + 
 				 "</h3>";
@@ -137,12 +137,18 @@ function init() {
 								
 								.data('madlib', submission.entries)
 								.click( function(event) {
+									
 									// call fill() on the madlib
 									$(this).closest('.madlibwrapper').children('.madlib').madlib('fill', $(this).data('madlib'));
+									
 									// remove active class from other submissions
 									$(this).siblings('.active-submission').removeClass('active-submission');
+									
 									// add active class to submission
 									$(this).addClass('active-submission');
+
+									// publish submit event
+									//$.publish('madlib.fillsubmit', [$('#madlib' + index)]);
 								});
 					});
 				}
@@ -162,11 +168,15 @@ function init() {
 								// add like handlers to submission likes
 								//$('#submissions' + index + ' .sublikes:not(.subproptitle)').click(function(event) {
 								$('#submissions' + index + ' .sublikelink').click(function(event) {
+									
+									// submission count field for the handler to refer to
 									var $submission_count = $(this).siblings('.sublikes');
+									
+									// load submission
 									$.getJSON('http://localhost:8085/likeSub?jsoncallback=?',
 												{key:$(this).siblings('.subkey').text()},
 												function(data) {
-													// TODO handle
+													//  handle
 													if(data.status === "success") {
 														$submission_count.text(data.count);
 													}
