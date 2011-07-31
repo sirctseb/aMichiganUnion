@@ -88,8 +88,9 @@ function init() {
 				
 				// put in submissions div
 				var $sublist = $("<div class='submissionslist' id='submissions" + index + "'>" +
-								"See other people's entries (spoiler alert!):</div>")
-								.appendTo($("#madlibwrapper" + index));
+								"</div>")
+								.appendTo($("#madlibwrapper" + index))
+								.before($("<div>See other people's entries (spoiler alert!):</div>"));
 								//.appendTo('body');
 								
 				// build tabs semantics
