@@ -41,26 +41,15 @@
 			},
 			// show the filled-in madlib
 			resolve : function() {
-				// call $this the madlib
-				//$this = $(this).parent();
-
-				// TODO animate
-				// show regular text
-				/*this.css({
-					color : "#000000"
-				});*/
 				
-				//this.find('.madlibtext').css({color : "#000"});
-				//var blah = this;
+				// show regular text
 				this.find('.madlibtext').addClass('madlibtextfilled', 2000);
-				/*.promise().done(function() {
-					blah.find(".entry").addClass("entryfilled");
-				});*/
 
 				// fill reference fields with contents of referant inputs
 				this.find(".ref").each(function filltext() {
 					$(this).val($(this).siblings('[entryno="' + $(this).attr("refno") + '"]').val());
 				});
+				
 				// modify css of entry fields
 				this.find(".entry").addClass("entryfilled");
 			},
@@ -107,6 +96,9 @@
 						text.append($("<span class='madlibtext'>" + components[component] + "</span>"));
 					}
 				}
+				
+				//this.find('.ref').attr({tabindex: "-1"});
+				this.find('.ref').attr('disabled', 'disabled');
 
 				// separate button - will probably change when we make this prettier
 				//this.append($('<br />'));
