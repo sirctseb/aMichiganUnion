@@ -44,7 +44,6 @@
 				
 				// show regular text
 				this.find('.madlibtext').addClass('madlibtextfilled', 400);
-					
 
 				// fill reference fields with contents of referant inputs
 				this.find(".ref").each(function filltext() {
@@ -55,7 +54,6 @@
 				this.find(".entry").addClass("entryfilled");
 			},
 			build : function(model) {
-				//$this = this;
 
 				// store name and likes / dislikes
 				$.extend(this.data('madlib'), {
@@ -259,6 +257,9 @@
 				
 				// pulse text once for feedback
 				this.find(".entry").css("background-color", "#dac1eb").animate({"background-color": "#FFFFFF"}, 300);
+				
+				// remove username from submission
+				this.find(":input[name='username']").val("");
 			}
 		};
 
