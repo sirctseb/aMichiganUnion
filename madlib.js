@@ -43,7 +43,8 @@
 			resolve : function() {
 				
 				// show regular text
-				this.find('.madlibtext').addClass('madlibtextfilled', 2000);
+				this.find('.madlibtext').addClass('madlibtextfilled', 400);
+					
 
 				// fill reference fields with contents of referant inputs
 				this.find(".ref").each(function filltext() {
@@ -113,19 +114,30 @@
 				$('<input class="go-button" type="button" value="go" />')
 					.bind('click.madlib',
 						function() {
+							
+							// fill fields and show text
 							$this.madlib('resolve');
+							
+							// show save options
 							$this.find('.save-paragraph').slideDown(
 								function() {
+									// publish resize event
 									$.publish('tier-resize', [$('.madlibtier')]);
 								});
 						})
 					.appendTo($godiv);
+
 				// make reset button
 				$('<input class="reset-button" type="button" value="reset" />')
 					.bind('click.madlib',
 						function() {
+							// remove filled style from entries
 							$this.find('.entry').val("").removeClass('entryfilled');
-							$this.find('.madlibtext').removeClass('madlibtextfilled');
+							// make text invisible again
+							$this.find('.madlibtext').queue(function(next) {$(this).removeClass('madlibtextfilled'); next();});
+							//$this.find('.madlibtext').stop().removeClass('madlibtextfilled');
+							//$this.find('.madlibtext').clearQueue().dequeue().removeClass('madlibtextfilled');
+							// publish reset event
 							$.publish('madlib.reset', [$this.closest('.madlib')]);
 						})
 					.appendTo($godiv);
@@ -237,12 +249,16 @@
 				}
 			},
 			fill : function(entries) {
-				// fill entry fields with supplied entries and then
-				// call resolve to fill refs and show text if it's not shown already
-				$(".pos").each(function(index, element) {
+				// fill entry fields with supplied entries
+				this.find(".pos").each(function(index, element) {
 					$(this).val(entries[parseInt($(this).attr("entryno")) - 1]);
 				});
+				
+				// call resolve to fill refs and show text if it's not shown already
 				this.madlib('resolve');
+				
+				// pulse text once for feedback
+				this.find(".entry").css("background-color", "#dac1eb").animate({"background-color": "#FFFFFF"}, 300);
 			}
 		};
 
