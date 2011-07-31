@@ -341,6 +341,15 @@ p.bridal
 {
 	display: none;
 }
+.loading
+{
+	opacity: 0.5;
+	/*background-color: #EEEEEE;*/
+}
+.hidden-fdbk
+{
+	display:none;
+}
 .clear
 {
   clear:both;

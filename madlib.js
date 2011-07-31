@@ -135,14 +135,43 @@
 				//this.append($('<br />'));
 
 				// make name field that people can fill if they want
-				$('<p class="save-paragraph">Save it so other people can see:<br />' +
+				var $saveparagraph = $('<p class="save-paragraph">Save it so other people can see:<br />' +
 				'<span class="indent"">Your name (optional): <input class="username-input" type="text" name="username" placeholder="Anonymous" /></span>' +
+				'<span class="ui-state-error hidden-fdbk madlib-error madlib-fdbk">Something went wrong, try again</span>' +
+				'<span class="madlib-fdbk hidden-fdbk madlib-success">Your entry has been saved!</span>' +
 				'</p>').appendTo(this);
 				
-				$('<input type="button" value="submit" />').bind('click.madlib', function() {$this.madlib('submit');}).appendTo(this.find('.save-paragraph'));
-				// make submit button and bind to submit method
+				// make submit button and ind to submit method
+				$('<input type="button" value="submit" />').bind('click.madlib',
+					function() {
+						var timeoutID = setTimeout( function() {
+							
+							// remove loading style
+							$saveparagraph.removeClass('loading');
+							
+							// show error
+							$saveparagraph.find('.madlib-error').removeClass('hidden-fdbk');
+
+						}, 2000);
+
+						// call submit method
+						$this.madlib('submit', {timeout:timeoutID});
+
+						// put loading style on
+						$saveparagraph.addClass('loading');
+						
+						// remove error message if it was there
+						$saveparagraph.find('.madlib-error').addClass('hidden-fdbk');
+
+					}).appendTo(this.find('.save-paragraph'));
+				
+				// remove feedback messages on input text focus
+				$saveparagraph.find('.username-input').focus(function() {
+					// remove error
+					$saveparagraph.find('.madlib-fdbk').addClass('hidden-fdbk');
+				});
 			},
-			submit : function() {
+			submit : function(options) {
 				// check that we know where to submit to
 				if(this.data('madlib').name) {
 
@@ -151,17 +180,38 @@
 					this.find(".pos").each(function() {
 						entries.push($(this).val());
 					});
-					//alert(this.children(':input[name="username"]').val());
+					
+					// timeout variable
+					var timeoutID = options.timeout;
+					
+					var $this = this;
+					
 					// submit to database
 					$.getJSON("http://localhost:8085/submit?jsoncallback=?", {
 						name : this.data('madlib').name,
 						entries : entries,
 						username : this.find(':input[name="username"]').val()
 					}, function(data) {
-						if(data.success) {
+						if(data.status === "success") {
 							// TODO notify success
+							
+							// take off loading style
+							$this.find('.save-paragraph').removeClass('loading');
+							
+							// kill error timeout
+							clearTimeout(timeoutID);
+							
+							// show success message
+							$this.find('.save-paragraph .madlib-success').removeClass('hidden-fdbk');
+							
 						} else {
 							// TODO notify fail
+							
+							// kill error timeout
+							clearTimeout(timeoutID);
+							
+							// TODO show error message
+							$this.find('.save-paragraph .madlib-error').removeClass('hidden-fdbk');
 						}
 					});
 				} else {
