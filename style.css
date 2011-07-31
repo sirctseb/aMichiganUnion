@@ -285,15 +285,27 @@ p.bridal
 {
 	display:none;
 }
-.tab-content
+.entry-list
 {
 	max-height: 100px;
 	/*height:20px;*/
 	overflow: auto;
+	clear:left;
 }
 .submission
 {
 	/*height:5px;*/
+	/*height:100%;*/
+	width:100%;
+	float:left;
+}
+.submission:hover
+{
+	background-color: #f8ebff;
+}
+.active-submission
+{
+	background-color: #f8ebff;
 }
 .subproptitle
 {
@@ -312,10 +324,22 @@ p.bridal
 .sublikes, .subdislikes
 {
 	width:70px;
+	text-align: center;
+	margin-right:20px;
+}
+.sublikes:not(.subproptitle)
+{
+	text-decoration: underline;
+	color: #3333ff;
+	cursor:pointer;
 }
 .subname
 {
-	width:200px;
+	width:150px;
+}
+.subkey
+{
+	display: none;
 }
 .clear
 {

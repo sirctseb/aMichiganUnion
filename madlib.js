@@ -49,8 +49,13 @@
 				/*this.css({
 					color : "#000000"
 				});*/
+				
 				//this.find('.madlibtext').css({color : "#000"});
-				this.find('.madlibtext').addClass('madlibtextfilled');
+				//var blah = this;
+				this.find('.madlibtext').addClass('madlibtextfilled', 2000);
+				/*.promise().done(function() {
+					blah.find(".entry").addClass("entryfilled");
+				});*/
 
 				// fill reference fields with contents of referant inputs
 				this.find(".ref").each(function filltext() {
@@ -129,6 +134,7 @@
 						function() {
 							$this.find('.entry').val("").removeClass('entryfilled');
 							$this.find('.madlibtext').removeClass('madlibtextfilled');
+							$.publish('madlib.reset', [$this.closest('.madlib')]);
 						})
 					.appendTo($godiv);
 				

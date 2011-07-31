@@ -30,6 +30,7 @@ function init() {
 	// NOTE works
 	//$('.madlib').live('mouseover', function() { alert('omg');});
 
+	// when the number of likes changes, push number of likes into ui
 	$.subscribe('likeschanged', function(data) {
 		// push likes from data to title of each madlib
 		$('.madlib').each(function(index, element) {
@@ -42,6 +43,13 @@ function init() {
 			// set dislikes in title
 			$title.find('.madlibdislikes').text($madlib.data('madlib').dislikes);
 		});
+	});
+
+	// do work when a madlib is reset
+	$.subscribe('madlib.reset', function(madlib) {
+		madlib.parent() // go to madlibwrapper
+			.find('.active-submission') // find any active submission
+			.removeClass('active-submission'); // remove active class
 	});
 
 	// TODO this should probably go into a plugin of its own or something
@@ -109,16 +117,21 @@ function init() {
 							.appendTo($('#' + subdata.href + modelkey + ' p'));
 							//;
 					
+					// wrapper for everything but headers
+					var $entrylist =  $("<div class='entry-list'></div>").appendTo($('#' + subdata.href + modelkey + ' p'));
+					
 					$.each(subdata.submissions, function(subindex, submission) {
 						// build submission list
 						$("<div class='submission clearleft' id='submission-" + modelkey + "-" + subindex + "'>" +
 								"<span class='subproperty subname'>" + submission.username + "</span>" +
-								"<span class='subproperty sublikes'>" + submission.likes + "</span>" +
+								"<span title='Click to like' class='subproperty sublikes'>" + submission.likes + "</span>" +
 								//"<span class='subproperty subdislikes'>" + submission.dislikes + "</span>" +
 								"<span class='subproperty subdate'>" + submission.date + "</span>"+
+								"<span class='subkey'>" + submission.key + "</span>" +
 								"</div>")
 								//.appendTo($sublist);
-								.appendTo($('#' + subdata.href + modelkey + ' p'));
+								//.appendTo($('#' + subdata.href + modelkey + ' p'));
+								.appendTo($entrylist);
 								//;
 								
 						// store submission data
@@ -127,36 +140,46 @@ function init() {
 						// (try to) set up handler for submission clicks
 						// TODO do this once for all of them 
 						$('#submission-' + modelkey + '-' + subindex).click( function(event) {
-						//$('.subdate').click(function(event) {
-							//alert('omg');
+							// call fill() on the madlib
 							$(this).closest('.madlibwrapper').children('.madlib').madlib('fill', $(this).data('madlib'));
+							// remove active class from other submissions
+							$(this).siblings('.active-submission').removeClass('active-submission');
+							// add active class to submission
+							$(this).addClass('active-submission');
 						});
 					});
 				}
-				
-				// load top submissions
-				/*$.getJSON("http://localhost:8085/topSubmissions?jsoncallback=?",
-							{name: data.models[index].name},
-							function(subdata) {
-								//buildSubList(subdata, index);
-							});*/
-							
-				//var localModel = index;
-				// load new submissions
+
+				// load new and top submissions
 				$.getJSON("http://localhost:8085/newTopSubmissions?jsoncallback=?",
 							{name: model.name},
 							function(subdata) {
 								buildSubList($.extend({}, subdata.newSubmissions, {'href': 'newsubs'}), index);
 								buildSubList($.extend({}, subdata.topSubmissions, {'href': 'topsubs'}), index);
+								
 								// build tabs
 								// TODO this could actually go before the data load
 								$('#submissions' + index).tabs();
+								
+								// add like handlers to submission likes
+								$('#submissions' + index + ' .sublikes:not(.subproptitle)').click(function(event) {
+									var $submission_count = $(this);
+									$.getJSON('http://localhost:8085/likeSub?jsoncallback=?',
+												{key:$(this).siblings('.subkey').text()},
+												function(data) {
+													// TODO handle
+													if(data.status === "success") {
+														$submission_count.text(data.count);
+													}
+												});
+								});
 							});
 				});
 			
 			// initialize accordion
 			$("#madlibaccordion").accordion({autoHeight:false,
 											header: "h3",
+											collapsible: true,
 											change: function(event, ui) {
 															//$(".madlibtier").css({height:$("#madlibaccordion").outerHeight()});
 															//$(".madlibtier").cake("open");
@@ -174,7 +197,6 @@ function init() {
 			$(this).closest('h3')			// go up to the h3 header
 					.next()					// go to madlibwrapper next to title
 					.children('.madlib')	// get actual madlib
-					//.siblings('.madlib')
 					.first().madlib('like', {like: true});	// call like method
 		});
 		// set up handlers for dislike buttons
@@ -186,15 +208,4 @@ function init() {
 					.madlib('like',{like: false});	// call like method
 		});*/
 	});
-}
-
-function resolve() {
-	// TODO animate
-	$(".madlib").css({
-		color : "#000000"
-	});
-	$(".entry").addClass("entryfilled");
-	$(".ref").each(function filltext() {
-		$(this).val($('[entryno="' + $(this).attr("refno") + '"]').val());
-	})
 }
