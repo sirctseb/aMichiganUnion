@@ -99,9 +99,6 @@
 				//this.find('.ref').attr({tabindex: "-1"});
 				this.find('.ref').attr('disabled', 'disabled');
 
-				// separate button - will probably change when we make this prettier
-				//this.append($('<br />'));
-
 				// so we can refer to this in event handlers
 				var $this = this;
 
@@ -144,15 +141,18 @@
 				
 				//this.append($('<br />'));
 
+				// make form to get enter from name field to submit
+				var $submitform = $('<form class="submit-form" action="./"></form>').appendTo(this);
+
 				// make name field that people can fill if they want
 				var $saveparagraph = $('<p class="save-paragraph">Save it so other people can see:<br />' +
 				'<span class="indent"">Your name (optional): <input class="username-input" type="text" name="username" placeholder="Anonymous" /></span>' +
 				'<span class="ui-state-error hidden-fdbk madlib-error madlib-fdbk">Something went wrong, try again</span>' +
 				'<span class="madlib-fdbk hidden-fdbk madlib-success">Your entry has been saved!</span>' +
-				'</p>').appendTo(this);
+				'</p>').appendTo($submitform);
 				
 				// make submit button and ind to submit method
-				$('<input type="button" value="submit" />').bind('click.madlib',
+				$('<input type="submit" value="submit" />').bind('click.madlib',
 					function() {
 						var timeoutID = setTimeout( function() {
 							
@@ -172,8 +172,11 @@
 						
 						// remove error message if it was there
 						$saveparagraph.find('.madlib-error').addClass('hidden-fdbk');
+						
+						// don't actually submit form
+						return false;
 
-					}).appendTo(this.find('.save-paragraph'));
+					}).appendTo($saveparagraph);
 				
 				// remove feedback messages on input text focus
 				$saveparagraph.find('.username-input').focus(function() {
