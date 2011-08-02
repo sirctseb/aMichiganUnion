@@ -77,6 +77,9 @@
 				// regex for identifying input fields
 				//var posexp = /\(pos\|\d+\|[A-z]+\|\)/g;
 				var posexp = /\(pos\|\d+\|[^|]+\|\)/g;
+				
+				// insert newlines
+				model.contents = model.contents.replace(/~~/g, "<br />")
 
 				// split string on tilde character
 				var components = model.contents.split("~");
