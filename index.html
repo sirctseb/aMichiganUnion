@@ -1,22 +1,35 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+  	<meta charset="utf-8" />
 		<link rel="icon" type="image/png" href="images/kc.png" />
 		<title>A Michigan Union - Get it?</title>
-		<script type="text/javascript" src="jquery-1.5.min.js">
+		<!--<script type="text/javascript" src="jquery-1.5.min.js">
+		</script>-->
+		<script type="text/javascript" src="jquery-1.6.1.js">
+		</script>
+		<script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js">
 		</script>
 		<script type="text/javascript" src="jquery.nivo.slider.js">
+		</script>
+		<script type="text/javascript" src="jq.pubsub.js">
 		</script>
 		<script type="text/javascript" src="js.js">
 		</script>
 		<script type="text/javascript" src="cake.js">
+		</script>
+		<script type="text/javascript" src="madlib.js">
 		</script>
 		<script type="text/javascript">
 			$(init);
 		</script>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" type="text/css" href="nivo-slider.css">
+		<!--<link rel="stylesheet" type="text/css" href="css/custom-theme/jquery-ui-1.8.14.custom.css">-->
+		<!--<link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.14.custom.css">-->
+		<!--<link rel="stylesheet" type="text/css" href="css/black-tie/jquery-ui-1.8.14.custom.css">-->
+		<link rel="stylesheet" type="text/css" href="css/black-tie-purple/jquery-ui-1.8.14.custom.css">
 	</head>
 	<body>
 		<div id="outmostwrapper">
@@ -213,7 +226,8 @@
 						</p>
 						<div class="puzzle-divide"></div>
 						<div class="card">
-							<iframe width="425" height="349" src="http://www.youtube.com/embed/Xn8RsQIub6Y" frameborder="0" allowfullscreen></iframe>
+							<!-- TODO error without network -->
+							<!--<iframe width="425" height="349" src="http://www.youtube.com/embed/Xn8RsQIub6Y" frameborder="0" allowfullscreen></iframe>-->
 						</div>
 						<div class="puzzle-divide"></div>
 						<strong>Puzzle</strong><br />
@@ -341,6 +355,35 @@
 					</div>
 				</div>
 			</div>
+			<div id="tier6" class="tier tier6 madlibtier"><div class="tierinner">
+				<div class="tierlabel">
+					MadLibs
+				</div>
+				<div class="tiercontent">
+					<div class="contentpad">
+						
+						<div id="madlibaccordion">
+						</div>
+						<!--<div class="madlib">
+						</div>-->
+					<!--	<div class="madlib">This is a test of
+							<input class="entry" type="text" entryno="1" placeholder="noun" />
+							So now there is some more text and
+							<input class="entry" type="text" entryno="2" placeholder="adjective" />
+							now i am testing this thing
+							<input class="entry ref" type="text" refno="1" />
+							<br /><input type="button" value="go" onclick="resolve();"/>
+					</div> -->
+					</div>
+				</div>
+			</div></div>
+			<div class="icing tier7">
+				<div class="icingleft">
+					<div class="icingright">
+					</div>
+				</div>
+			</div>
+			
 		</div>
 	</body>
 </html>

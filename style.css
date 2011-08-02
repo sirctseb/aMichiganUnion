@@ -166,7 +166,7 @@ p.bridal
 {
   width:440px;
 }
-.tier7
+.tier8
 {
   width:480px;
 }
@@ -182,13 +182,193 @@ p.bridal
 }
 
 /* Mad lib styles */
-.madlib p
+.madlibtier
+{
+	font: 80% "Trebuchet MS", sans-serif;/* margin: 50px;*/
+}
+#madlibaccordion
+{
+	/*height:800px;*/
+}
+.madlib
+{
+	position: relative;
+}
+.madlibtext
 {
 	/* text white to start so you can't see it */
 	color:#FFFFFF;
+	/* dashed underlines to give an idea of text layout */
+	/* looks stupid */
+	/*border-bottom: 1px dashed #BBBBBB;*/
 }
-
+.madlibtextfilled
+{
+	color:#000;
+}
+.madliblikessection
+{
+	float:right;
+}
+.madliblikeslabel
+{
+	/*margin-left:15px;*/
+	text-decoration: underline;
+}
+.madliblikes, .madlibdislikes
+{
+	/*margin-left:4px;*/
+	text-decoration: none;
+}
+.entry
+{
+	/* TODO center placeholder */
+	text-align: center;
+}
+.pos
+{
+}
+.ref
+{
+	border:none;
+}
+.entryfilled
+{
+	/* keep only bottom border
+	/*border-width:0 0 1px 0;*/
+	border-width:2px;
+	border-style:solid solid inset solid;
+	border-color:white white #AAAAAA white;
+	/*padding:3px 2px 1px 2px;*/
+	
+	/* keep light borders so it's clear that nothing moved*/
+	/*border-width:0 0 2px 0;*/
+	/*border-width:2px;
+	border-style: inset;
+	border-color:#FFFFFF #EEEEEE #AAAAAA #EEEEEE;
+	border-color:#EEE;
+	padding:3px 2px 1px 2px;*/
+	
+	/*border-top-color:white;
+	border-right-color:white;
+	border-left-color:white;*/
+	/*border-bottom-width: 1px;*/
+	/*border-bottom-color: black;
+	border-bottom-style: solid;*/
+}
+.go-div
+{
+	text-align: center;
+}
+.go-button
+{
+	/* TODO big flat gray style */
+	/*width:70px;
+	height:30px;
+	background-color:#DEDEDE;
+	border-width:1px;*/
+	
+	
+	/* TODO trying to center, had to use go-div */
+	/*margin-left:auto;
+	margin-right:auto;*/
+}
+.username-input
+{
+	/*margin-left:20px;*/
+}
+.indent
+{
+	margin-left:20px;
+}
+.save-paragraph
+{
+	display:none;
+}
+.entry-list
+{
+	max-height: 100px;
+	/*height:20px;*/
+	overflow: auto;
+	clear:left;
+}
+.submission
+{
+	/*height:5px;*/
+	/*height:100%;*/
+	width:100%;
+	float:left;
+}
+.submission:hover
+{
+	background-color: #f8ebff;
+}
+.active-submission
+{
+	background-color: #f8ebff;
+}
+.subproptitle
+{
+	/*text-align: center;*/
+}
+.subproperty
+{
+	display:block;
+	float:left;
+	/*text-align: center;*/
+}
+.subdate
+{
+	width:200px;
+}
+.sublikes, .subdislikes
+{
+	width:70px;
+	text-align: center;
+	margin-right:20px;
+}
+.sublikes:not(.subproptitle)
+{
+	/*text-decoration: underline;
+	color: #3333ff;
+	cursor:pointer;*/
+}
+.subname
+{
+	width:150px;
+}
+.sublikelink
+{
+	float:right;
+	color:#3333ff;
+	cursor:pointer;
+}
+.sublikelink:hover
+{
+	text-decoration:underline;
+}
+.subkey
+{
+	display: none;
+}
+.loading
+{
+	opacity: 0.5;
+	/*background-color: #EEEEEE;*/
+}
+.hidden-fdbk
+{
+	display:none;
+}
 .clear
 {
   clear:both;
+}
+.clearleft
+{
+	clear:left;
+}
+.clearright
+{
+	clear:right;
 }

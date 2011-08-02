@@ -109,7 +109,7 @@
             $('<div class="nivo-caption"><p></p></div>').css({ display:'none', opacity:settings.captionOpacity })
         );			
         //Process initial  caption
-        if(vars.currentImage.attr('title') != ''){
+        if(vars.currentImage.attr('title') != '' && vars.currentImage.attr('title') != undefined){
             var title = vars.currentImage.attr('title');
             if(title.substr(0,1) == '#') title = $(title).html();
             $('.nivo-caption p', slider).html(title);					
