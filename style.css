@@ -204,6 +204,12 @@ p.bridal
 	/* looks stupid */
 	/*border-bottom: 1px dashed #BBBBBB;*/
 }
+label.placeholder
+{
+cursor: text;
+padding: 4px 4px 4px 4px;
+color: #999999;
+}
 .madlibtextfilled
 {
 	color:#000;
