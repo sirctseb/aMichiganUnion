@@ -208,6 +208,14 @@ p.bridal
 	/* looks stupid */
 	/*border-bottom: 1px dashed #BBBBBB;*/
 }
+.madlibtext::selection
+{
+	background-color:white;
+}
+.madlibtext::-moz-selection
+{
+	background-color:white;
+}
 label.placeholder
 {
 cursor: text;
