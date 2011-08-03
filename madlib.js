@@ -99,6 +99,11 @@
 					}
 				}
 				
+				// add plugin-based placeholders if not supported in browser
+				if(!supports_placeholder()) {
+					this.find('.pos').placeholder();
+				}
+				
 				//this.find('.ref').attr({tabindex: "-1"});
 				this.find('.ref').attr('disabled', 'disabled');
 

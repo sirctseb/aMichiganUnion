@@ -8,6 +8,12 @@ $.replace = function(string, obj) {
 	return string;
 }
 
+// TODO put somewhere better
+// TODO actually, use modernizr
+supports_placeholder = function() {
+	return 'placeholder' in document.createElement('input');
+}
+
 // global domain variable because I don't know how to do it better
 debug = false;
 if(debug) {
