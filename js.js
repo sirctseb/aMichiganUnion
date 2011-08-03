@@ -205,7 +205,7 @@ function init() {
 											header: "h3",
 											collapsible: true,
 											// start all collapsed to force placeholder reset without html5
-											active: supports_placeholder() ? 1 : false,
+											active: supports_placeholder() ? 0 : false,
 											change: function(event, ui) {
 															//$(".madlibtier").css({height:$("#madlibaccordion").outerHeight()});
 															//$(".madlibtier").cake("open");
