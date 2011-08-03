@@ -204,14 +204,8 @@ function init() {
 			$("#madlibaccordion").accordion({autoHeight:false,
 											header: "h3",
 											collapsible: true,
-											// start all collapsed to force placeholder reset without html5
-											//active: supports_placeholder() ? 0 : false,
 											change: function(event, ui) {
-															//$(".madlibtier").css({height:$("#madlibaccordion").outerHeight()});
-															//$(".madlibtier").cake("open");
 															$.publish("tier-resize", [$('.madlibtier')]);
-															// load / reset placeholders on open accordion
-															//$('.pos').placeholder();
 														}
 											});
 			// add plugin-based placeholders if not supported in browser
