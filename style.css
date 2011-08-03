@@ -217,6 +217,12 @@ p.bridal
 {
 	background-color:white;
 }
+/* style placeholder */
+.placeholder
+{
+	color:#999;
+	font-style:italic
+}
 label.placeholder
 {
 cursor: text;
