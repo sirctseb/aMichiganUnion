@@ -78,7 +78,7 @@ Thanks to...
 			if (!input.attr('placeholder') || input.data(ph) === ph) return; //already watermarked
 
 			//make sure the input tag has an ID assigned, if not, assign one.
-			if (!input.attr('id')) input.attr('id') = 'input_' + rnd;
+			if (!input.attr('id')) input.attr('id', 'input_' + rnd);
 
 			label	.attr('id',input.attr('id') + "_placeholder")
 					.data(ph, '#' + input.attr('id'))	//reference to the input tag
