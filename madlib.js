@@ -137,6 +137,8 @@
 							//$this.find('.madlibtext').clearQueue().dequeue().removeClass('madlibtextfilled');
 							// publish reset event
 							$.publish('madlib.reset', [$this.closest('.madlib')]);
+							// reset placeholders
+							$('.pos').placeholder();
 						})
 					.appendTo($godiv);
 				
