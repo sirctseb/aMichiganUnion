@@ -211,14 +211,14 @@ function init() {
 															//$(".madlibtier").cake("open");
 															$.publish("tier-resize", [$('.madlibtier')]);
 															// load / reset placeholders on open accordion
-															$('.pos').placeholder();
+															//$('.pos').placeholder();
 														}
 											});
 			// add plugin-based placeholders if not supported in browser
 			//if(!supports_placeholder()) {
 				//this.find('.pos').placeholder();
 			//}
-			//$('.pos').placeholder();
+			$('.pos').placeholderEnhanced();
 		} else {
 			// $.publish("fail: could not load madlibs");
 		}
