@@ -215,10 +215,9 @@ function init() {
 														}
 											});
 			// add plugin-based placeholders if not supported in browser
-			//if(!supports_placeholder()) {
-				//this.find('.pos').placeholder();
-			//}
-			$('.pos').placeholderEnhanced();
+			if(!supports_placeholder()) {
+				$('.pos').placeholderEnhanced();
+			}
 		} else {
 			// $.publish("fail: could not load madlibs");
 		}
