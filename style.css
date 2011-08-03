@@ -211,6 +211,7 @@ p.bridal
 .madlibtext::selection
 {
 	background-color:white;
+	color:white;
 }
 .madlibtext::-moz-selection
 {
