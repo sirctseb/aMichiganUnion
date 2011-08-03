@@ -8,6 +8,14 @@ $.replace = function(string, obj) {
 	return string;
 }
 
+// global domain variable because I don't know how to do it better
+debug = false;
+if(debug) {
+	domain = "localhost:8085";
+} else {
+	domain = "amichiganunion.appspot.com";
+}
+
 function init() {
 	$("#slider").nivoSlider({
 		manualAdvance : true,
@@ -55,7 +63,7 @@ function init() {
 	// TODO this should probably go into a plugin of its own or something
 	// TODO just put this in madlib plugin
 	// get madlib data
-	$.getJSON("http://localhost:8085/loadAll?jsoncallback=?", function(data) {
+	$.getJSON("http://" + domain + "/loadAll?jsoncallback=?", function(data) {
 		if(data.status == "success") {
 			
 			//for(var model in data.models) {
@@ -154,7 +162,7 @@ function init() {
 				}
 
 				// load new and top submissions
-				$.getJSON("http://localhost:8085/newTopSubmissions?jsoncallback=?",
+				$.getJSON("http://" + domain + "/newTopSubmissions?jsoncallback=?",
 							{name: model.name},
 							// put data into lists and build tab widget
 							function(subdata) {
@@ -173,7 +181,7 @@ function init() {
 									var $submission_count = $(this).siblings('.sublikes');
 									
 									// load submission
-									$.getJSON('http://localhost:8085/likeSub?jsoncallback=?',
+									$.getJSON('http://' + domain + '/likeSub?jsoncallback=?',
 												{key:$(this).siblings('.subkey').text()},
 												function(data) {
 													//  handle
@@ -209,13 +217,5 @@ function init() {
 					.children('.madlib')	// get actual madlib
 					.first().madlib('like', {like: true});	// call like method
 		});
-		// set up handlers for dislike buttons
-		/*$('.madlibdislikes').bind('click', function() {
-			$(this).closest('h3')			// go up to the h3 header
-					.next()					// go to madlibwrapper next to title
-					.children('.madlib')	// get actual madlib
-					//.siblings('.madlib')
-					.madlib('like',{like: false});	// call like method
-		});*/
 	});
 }

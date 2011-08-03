@@ -22,7 +22,7 @@
 							
 						// otherwise, it's just the name and we have to load it
 						} else if(options.name) {
-							$.getJSON("http://localhost:8085/load?jsoncallback=?", {
+							$.getJSON("http://" + domain + "/load?jsoncallback=?", {
 								name : options.name
 							}, function(data) {
 								if(data.status == "success") {
@@ -203,7 +203,7 @@
 					var $this = this;
 					
 					// submit to database
-					$.getJSON("http://localhost:8085/submit?jsoncallback=?", {
+					$.getJSON("http://" + domain + "/submit?jsoncallback=?", {
 						name : this.data('madlib').name,
 						entries : entries,
 						username : this.find(':input[name="username"]').val()
@@ -238,7 +238,7 @@
 				var name = this.data("madlib").name;
 				var $madlib = this;
 				if(name) {
-					$.getJSON("http://localhost:8085/like?jsoncallback=?",
+					$.getJSON("http://" + domain + "/like?jsoncallback=?",
 						{name:name, like:options.like},
 						function(data) {
 							// TODO disable like button or something
