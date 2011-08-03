@@ -75,7 +75,12 @@ Thanks to...
 				,input=$(this)
 				,label=$('<label style="position:absolute;display:none;top:0;left:0;"></label>');
 
-			if (!input.attr('placeholder') || input.data(ph) === ph) return; //already watermarked
+			if (!input.attr('placeholder') || input.data(ph) === ph) {
+				// TODO try to reset
+				itemIn.call(this);
+				itemOut.call(this);
+				return; //already watermarked
+			}
 
 			//make sure the input tag has an ID assigned, if not, assign one.
 			if (!input.attr('id')) input.attr('id', 'input_' + rnd);
@@ -87,6 +92,7 @@ Thanks to...
 					.addClass(opts.labelClass + '-for-' + this.tagName.toLowerCase()) //ex: watermark-for-textarea
 					.addClass(phl)
 					.text(input.attr('placeholder'));
+					//.css({top:input.css('top')+"px", left:input.css('left')+"px"});
 
 			input
 				.data(phl, '#' + label.attr('id'))	//set a reference to the label

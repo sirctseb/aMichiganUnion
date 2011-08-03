@@ -99,11 +99,6 @@
 					}
 				}
 				
-				// add plugin-based placeholders if not supported in browser
-				if(!supports_placeholder()) {
-					this.find('.pos').placeholder();
-				}
-				
 				//this.find('.ref').attr({tabindex: "-1"});
 				this.find('.ref').attr('disabled', 'disabled');
 
@@ -191,6 +186,12 @@
 					// remove error
 					$saveparagraph.find('.madlib-fdbk').addClass('hidden-fdbk');
 				});
+				
+				// add plugin-based placeholders if not supported in browser
+				/*if(!supports_placeholder()) {
+					this.find('.pos').placeholder();
+				}*/
+				
 			},
 			submit : function(options) {
 				// check that we know where to submit to
