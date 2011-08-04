@@ -161,7 +161,7 @@
 				'<span class="indent"">Your name (optional): <input class="username-input" type="text" name="username" placeholder="Anonymous" /></span>' +
 				'<span class="ui-state-error hidden-fdbk madlib-error madlib-fdbk">Something went wrong, try again</span>' +
 				'</p>').appendTo($submitform);
-				$saveparagraph.after($('<p class="madlib-fdbk hidden-fdbk madlib-success">Your entry has been shared!</p>'));
+				$saveparagraph.after($('<p class="madlib-fdbk hidden-fdbk madlib-success">Your entry has been shared! Refresh to see it in the list.</p>'));
 				
 				// make submit button and ind to submit method
 				$('<input type="submit" value="share" />').bind('click.madlib',
