@@ -15,7 +15,7 @@ supports_placeholder = function() {
 }
 
 // global domain variable because I don't know how to do it better
-debug = false;
+debug = true;
 if(debug) {
 	domain = "localhost:8085";
 } else {
@@ -142,7 +142,7 @@ function init() {
 								"<span title='Click to like' class='subproperty sublikes'>" + submission.likes + "</span>" +
 								//"<span class='subproperty subdislikes'>" + submission.dislikes + "</span>" +
 								"<span class='subproperty subdate'>" + submission.date + "</span>"+
-								"<span title='Click to like' class='sublikelink'>Like</span>" +
+								"<span title='Click to like' class='sublikelink sublike'>Like</span>" +
 								"<span class='subkey'>" + submission.key + "</span>" +
 								"</div>")
 								//.appendTo($sublist);
@@ -181,10 +181,12 @@ function init() {
 								
 								// add like handlers to submission likes
 								//$('#submissions' + index + ' .sublikes:not(.subproptitle)').click(function(event) {
-								$('#submissions' + index + ' .sublikelink').click(function(event) {
+								$('#submissions' + index + ' .sublikelink').one('click', function(event) {
 									
 									// submission count field for the handler to refer to
 									var $submission_count = $(this).siblings('.sublikes');
+									
+									var $link = $(this);
 									
 									// load submission
 									$.getJSON('http://' + domain + '/likeSub?jsoncallback=?',
@@ -193,6 +195,8 @@ function init() {
 													//  handle
 													if(data.status === "success") {
 														$submission_count.text(data.count);
+														// remove clickable style from link
+														$link.removeClass('sublikelink');
 													}
 												});
 									return false;

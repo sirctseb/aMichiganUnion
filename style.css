@@ -364,9 +364,12 @@ color: #999999;
 {
 	width:150px;
 }
-.sublikelink
+.sublike
 {
 	float:right;
+}
+.sublikelink
+{
 	color:#3333ff;
 	cursor:pointer;
 }
