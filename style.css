@@ -381,10 +381,18 @@ color: #999999;
 {
 	display: none;
 }
+.submit-hide
+{
+	display:none;
+}
 .loading
 {
 	opacity: 0.5;
 	/*background-color: #EEEEEE;*/
+}
+.madlib-success
+{
+	color:green;
 }
 .hidden-fdbk
 {

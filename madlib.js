@@ -138,7 +138,14 @@
 							// publish reset event
 							$.publish('madlib.reset', [$this.closest('.madlib')]);
 							// reset placeholders
-							$('.pos').placeholder();
+							//$('.pos').placeholder();
+							// show save options
+							$this.find('.save-paragraph').slideDown(
+								function() {
+									// publish resize event
+									$.publish('tier-resize', [$('.madlibtier')]);
+								})
+								.siblings('.madlib-success').addClass('hidden-fdbk');
 						})
 					.appendTo($godiv);
 				
@@ -153,11 +160,11 @@
 				var $saveparagraph = $('<p class="save-paragraph">Save it so other people can see:<br />' +
 				'<span class="indent"">Your name (optional): <input class="username-input" type="text" name="username" placeholder="Anonymous" /></span>' +
 				'<span class="ui-state-error hidden-fdbk madlib-error madlib-fdbk">Something went wrong, try again</span>' +
-				'<span class="madlib-fdbk hidden-fdbk madlib-success">Your entry has been saved!</span>' +
 				'</p>').appendTo($submitform);
+				$saveparagraph.after($('<p class="madlib-fdbk hidden-fdbk madlib-success">Your entry has been shared!</p>'));
 				
 				// make submit button and ind to submit method
-				$('<input type="submit" value="submit" />').bind('click.madlib',
+				$('<input type="submit" value="share" />').bind('click.madlib',
 					function() {
 						var timeoutID = setTimeout( function() {
 							
@@ -186,7 +193,7 @@
 				// remove feedback messages on input text focus
 				$saveparagraph.find('.username-input').focus(function() {
 					// remove error
-					$saveparagraph.find('.madlib-fdbk').addClass('hidden-fdbk');
+					$saveparagraph.siblings('.madlib-fdbk').addClass('hidden-fdbk');
 				});
 				
 				// add plugin-based placeholders if not supported in browser
@@ -220,13 +227,14 @@
 							// TODO notify success
 							
 							// take off loading style
-							$this.find('.save-paragraph').removeClass('loading');
+							$this.find('.save-paragraph').removeClass('loading').slideUp();
 							
 							// kill error timeout
 							clearTimeout(timeoutID);
 							
 							// show success message
-							$this.find('.save-paragraph .madlib-success').removeClass('hidden-fdbk');
+							$this.find('.madlib-success').removeClass('hidden-fdbk');
+							
 							
 						} else {
 							// TODO notify fail
