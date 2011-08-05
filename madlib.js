@@ -157,7 +157,7 @@
 				var $submitform = $('<form class="submit-form" action="./"></form>').appendTo(this);
 
 				// make name field that people can fill if they want
-				var $saveparagraph = $('<p class="save-paragraph">Save it so other people can see:<br />' +
+				var $saveparagraph = $('<p class="save-paragraph">Share it so other people can see:<br />' +
 				'<span class="indent"">Your name (optional): <input class="username-input" type="text" name="username" placeholder="Anonymous" /></span>' +
 				'<span class="ui-state-error hidden-fdbk madlib-error madlib-fdbk">Something went wrong, try again</span>' +
 				'</p>').appendTo($submitform);
