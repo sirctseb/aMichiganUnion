@@ -68,9 +68,12 @@
 				this.addClass("madlib");
 				
 				// add paragraph for text
-				this.append($("<p class='madlibcontents'></p>"));
+				madlibform = $("<form class='madlib-form' action='./'><p class='madlibcontents'></p></form>");
+				this.append(madlibform);
+				
 				// get reference to paragraph
-				var text = this.children('p');
+				//var text = this.children('p');
+				var text = this.find('p');
 
 				// regex for identifying references
 				var refexp = /\(ref\|\d+\|\)/g;
@@ -99,19 +102,29 @@
 					}
 				}
 				
-				//this.find('.ref').attr({tabindex: "-1"});
+				// disable reference fields so the user can't edit them,
+				// and they are out of the tab sequence
 				this.find('.ref').attr('disabled', 'disabled');
 
 				// so we can refer to this in event handlers
 				var $this = this;
 
 				// make wrapper for centering
-				var $godiv = $('<p class="go-div"></p>').appendTo(this);
+				var $godiv = $('<p class="go-div"></p>').appendTo(madlibform);
 				
 				// make button and bind to resolve method
-				$('<input class="go-button" type="button" value="go" />')
+				$('<input class="go-button" type="submit" value="go" />')
 					.bind('click.madlib',
 						function() {
+							
+							// check that entry boxes are filled
+							// TODO this assumes we're not using the placeholder polyfill that puts in a value
+							if($this.find('.pos:text[value=""]').size() > 0) {
+								//$this.find('.pos:text[value=""]').fadeTo(0.5).delay(100).fadeTo(1);
+								$this.find('.entry:text[value=""]').fadeTo(50,0.25).fadeTo(50,1);
+								return false;
+							}
+							// TODO implement for placeholder polyfill classes
 							
 							// fill fields and show text
 							$this.madlib('resolve');
@@ -122,6 +135,9 @@
 									// publish resize event
 									$.publish('tier-resize', [$('.madlibtier')]);
 								});
+								
+							// don't submit form
+							return false;
 						})
 					.appendTo($godiv);
 
@@ -140,7 +156,7 @@
 							$.publish('madlib.reset', [$this.closest('.madlib')]);
 
 							// show save options
-							$this.find('.save-paragraph').slideDown(
+							$this.find('.save-paragraph').slideUp(
 								function() {
 									// publish resize event
 									$.publish('tier-resize', [$('.madlibtier')]);
