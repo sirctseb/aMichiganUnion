@@ -68,9 +68,12 @@
 				this.addClass("madlib");
 				
 				// add paragraph for text
-				this.append($("<p class='madlibcontents'></p>"));
+				madlibform = $("<form class='madlib-form' action='./'><p class='madlibcontents'></p></form>");
+				this.append(madlibform);
+				
 				// get reference to paragraph
-				var text = this.children('p');
+				//var text = this.children('p');
+				var text = this.find('p');
 
 				// regex for identifying references
 				var refexp = /\(ref\|\d+\|\)/g;
@@ -99,17 +102,19 @@
 					}
 				}
 				
-				//this.find('.ref').attr({tabindex: "-1"});
+				// disable reference fields so the user can't edit them,
+				// and they are out of the tab sequence
 				this.find('.ref').attr('disabled', 'disabled');
 
 				// so we can refer to this in event handlers
 				var $this = this;
 
 				// make wrapper for centering
-				var $godiv = $('<p class="go-div"></p>').appendTo(this);
+				//var $godiv = $('<p class="go-div"></p>').appendTo(this);
+				var $godiv = $('<p class="go-div"></p>').appendTo(madlibform);
 				
 				// make button and bind to resolve method
-				$('<input class="go-button" type="button" value="go" />')
+				$('<input class="go-button" type="submit" value="go" />')
 					.bind('click.madlib',
 						function() {
 							
@@ -122,6 +127,9 @@
 									// publish resize event
 									$.publish('tier-resize', [$('.madlibtier')]);
 								});
+								
+							// don't submit form
+							return false;
 						})
 					.appendTo($godiv);
 
@@ -140,7 +148,7 @@
 							// reset placeholders
 							//$('.pos').placeholder();
 							// show save options
-							$this.find('.save-paragraph').slideDown(
+							$this.find('.save-paragraph').slideUp(
 								function() {
 									// publish resize event
 									$.publish('tier-resize', [$('.madlibtier')]);
