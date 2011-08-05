@@ -15,7 +15,7 @@ supports_placeholder = function() {
 }
 
 // global domain variable because I don't know how to do it better
-debug = false;
+debug = true;
 if(debug) {
 	domain = "localhost:8085";
 } else {
