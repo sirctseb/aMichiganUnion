@@ -68,7 +68,7 @@
 				this.addClass("madlib");
 				
 				// add paragraph for text
-				this.append($("<p class='madlibcontents'><form></form></p>"));
+				this.append($("<p class='madlibcontents'></p>"));
 				// get reference to paragraph
 				var text = this.children('p');
 
