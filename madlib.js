@@ -110,13 +110,21 @@
 				var $this = this;
 
 				// make wrapper for centering
-				//var $godiv = $('<p class="go-div"></p>').appendTo(this);
 				var $godiv = $('<p class="go-div"></p>').appendTo(madlibform);
 				
 				// make button and bind to resolve method
 				$('<input class="go-button" type="submit" value="go" />')
 					.bind('click.madlib',
 						function() {
+							
+							// check that entry boxes are filled
+							// TODO this assumes we're not using the placeholder polyfill that puts in a value
+							if($this.find('.pos:text[value=""]').size() > 0) {
+								//$this.find('.pos:text[value=""]').fadeTo(0.5).delay(100).fadeTo(1);
+								$this.find('.entry:text[value=""]').fadeTo(50,0.25).fadeTo(50,1);
+								return false;
+							}
+							// TODO implement for placeholder polyfill classes
 							
 							// fill fields and show text
 							$this.madlib('resolve');
