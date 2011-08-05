@@ -68,7 +68,7 @@
 				this.addClass("madlib");
 				
 				// add paragraph for text
-				this.append($("<p class='madlibcontents'></p>"));
+				this.append($("<p class='madlibcontents'><form></form></p>"));
 				// get reference to paragraph
 				var text = this.children('p');
 
@@ -129,16 +129,16 @@
 				$('<input class="reset-button" type="button" value="reset" />')
 					.bind('click.madlib',
 						function() {
+							
 							// remove filled style from entries
 							$this.find('.entry').val("").removeClass('entryfilled');
+							
 							// make text invisible again
 							$this.find('.madlibtext').queue(function(next) {$(this).removeClass('madlibtextfilled'); next();});
-							//$this.find('.madlibtext').stop().removeClass('madlibtextfilled');
-							//$this.find('.madlibtext').clearQueue().dequeue().removeClass('madlibtextfilled');
+							
 							// publish reset event
 							$.publish('madlib.reset', [$this.closest('.madlib')]);
-							// reset placeholders
-							//$('.pos').placeholder();
+
 							// show save options
 							$this.find('.save-paragraph').slideDown(
 								function() {
@@ -148,10 +148,6 @@
 								.siblings('.madlib-success').addClass('hidden-fdbk');
 						})
 					.appendTo($godiv);
-				
-				// TODO separation between sections
-				
-				//this.append($('<br />'));
 
 				// make form to get enter from name field to submit
 				var $submitform = $('<form class="submit-form" action="./"></form>').appendTo(this);
@@ -195,11 +191,6 @@
 					// remove error
 					$saveparagraph.siblings('.madlib-fdbk').addClass('hidden-fdbk');
 				});
-				
-				// add plugin-based placeholders if not supported in browser
-				/*if(!supports_placeholder()) {
-					this.find('.pos').placeholder();
-				}*/
 				
 			},
 			submit : function(options) {
