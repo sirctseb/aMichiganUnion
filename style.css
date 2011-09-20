@@ -177,7 +177,8 @@ p.bridal
   font-size:large;
   height:100%;
   cursor:pointer;
-  color:#7300C4;
+  /*color:#7300C4;*/
+  color:#0000FF;
   font-style:italic;
 }
 
