@@ -113,8 +113,8 @@ function init() {
 				
 				// add ul and titles
 				var $subtabul = $("<ul></ul>").appendTo($sublist);
-				$($.replace(tabtitletemplate, {'tabhref': 'newsubs' + index, 'tabtitle': 'New'})).appendTo($subtabul);
 				$($.replace(tabtitletemplate, {'tabhref': 'topsubs' + index, 'tabtitle': 'Top'})).appendTo($subtabul);
+				$($.replace(tabtitletemplate, {'tabhref': 'newsubs' + index, 'tabtitle': 'New'})).appendTo($subtabul);
 				
 				// add content elements
 				$($.replace(tabcontenttemplate, {'tabhref': 'newsubs' + index, 'tabcontent': ''})).insertAfter($subtabul)
@@ -172,8 +172,8 @@ function init() {
 							{name: model.name},
 							// put data into lists and build tab widget
 							function(subdata) {
-								buildSubList($.extend({}, subdata.newSubmissions, {'href': 'newsubs'}), index);
 								buildSubList($.extend({}, subdata.topSubmissions, {'href': 'topsubs'}), index);
+								buildSubList($.extend({}, subdata.newSubmissions, {'href': 'newsubs'}), index);
 								
 								// build tabs
 								// TODO this could actually go before the data load
