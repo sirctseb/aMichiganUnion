@@ -327,6 +327,10 @@ color: #999999;
 	width:100%;
 	float:left;
 }
+.submission:nth-child(odd)
+{
+	background-color: #e0ecff;
+}
 .submission:hover
 {
 	background-color: #f8ebff;
