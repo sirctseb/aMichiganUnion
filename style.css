@@ -327,17 +327,19 @@ color: #999999;
 	width:100%;
 	float:left;
 }
-.submission:nth-child(odd)
+.submission:nth-child(odd):not(.active-submission)
 {
 	background-color: #e0ecff;
 }
 .submission:hover
 {
-	background-color: #f8ebff;
+	/*background-color: #f8ebff;*/
+	background-color: #F3FFAD;
 }
 .active-submission
 {
-	background-color: #f8ebff;
+	/*background-color: #f8ebff;*/
+	background-color: #F8FF3B;
 }
 .subproptitle
 {
