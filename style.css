@@ -7,13 +7,13 @@
 /* two elements to do two backgrounds */
 body
 {
-	background:url(images/leftbackgroundmb.png) top left no-repeat fixed;
+	background:url(images/leftbackground.png) top left no-repeat fixed;
 }
 #outmostwrapper
 {
   margin-left:auto;
   margin-right:auto;
-  background:url(images/rightbackgroundmb.png) top right no-repeat fixed;
+  background:url(images/rightbackground.png) top right no-repeat fixed;
 }
 .disabled
 {
@@ -177,8 +177,8 @@ p.bridal
   font-size:large;
   height:100%;
   cursor:pointer;
-  /*color:#7300C4;*/
-  color:#0000aa;
+  color:#7300C4;
+  /*color:#0000aa;*/
   font-style:italic;
 }
 
