@@ -1,5 +1,96 @@
 .centered
-  { margin-left:auto; margin-right:auto; display:block;}
+{
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+}
+.rsvpcard
+{
+	text-align:center;
+	color:#992088;
+	font-family:"Georgia";
+	font-size:larger;
+	line-height:40px;
+	/*background-image: url(images/cardstock.png);*/
+	background-image: url(images/cardstockWithEnvelope.png);
+	background-position: top center;
+	background-repeat: no-repeat;
+	/*background-size: 800px 880px;*/
+	padding-top:25px;
+}
+.rsvpNameWrapper
+{
+	margin-top:40px;
+	width:536px; height:55px;
+	background: url(images/MUnderscore.png) top left no-repeat;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:20px;
+}
+.rsvpNameText
+{
+	margin-left:70px;
+	width:400px; height:40px;
+	font-size:x-large;
+	font-family: "Georgia";
+	color:#992088;
+	background:transparent;
+	/*border-color:#DCDCDC;*/
+}
+.rsvpNameText:not(:hover)
+{
+	border:solid;
+	border-width:2px;
+	border-color:transparent;
+}
+.rsvpcheck
+{
+	display:none
+}
+.checklabel
+{
+	width:189px; height:54px;
+	display:inline-block;
+	cursor:pointer;
+}
+/*input[type=radio] + label.acceptchecklabel
+{
+	background: url(images/acceptsUnchecked.png) top left no-repeat;
+}*/
+input[type=radio] + label.acceptchecklabel
+{
+	background: url(images/acceptsChecked.png) top left no-repeat;
+}
+input[type=radio] + label.regretchecklabel
+{
+	background: url(images/regretsUnchecked.png) top left no-repeat;
+}
+/*input[type=radio]:checked + label.regretchecklabel
+{
+	background: url(images/regretsChecked.png) top left no-repeat;
+}*/
+.entreeCountInput
+{
+	width:50px;
+	border-width:2px;
+	border-style:solid;
+	border-color: transparent transparent #992088 transparent;
+	font-size:large;
+	color:#992088;
+	text-align:center;
+	background:transparent;
+}
+.entreeCountInput + label
+{
+	display:inline-block;
+	text-align:left;
+	/*width:250px;*/
+	min-width: 240px;
+}
+#rsvpSubmit
+{
+	margin-top:65px;
+}
 .card
 {
   text-align:center;

@@ -22,6 +22,25 @@ if(debug) {
 	domain = "amichiganunion.appspot.com";
 }
 
+function regretClick() {
+	// sanity check
+	//if($("#regretcheck").attr("checked")) {
+		$("#regretcheck + label").css({'background-image': "url(../images/regretsChecked.png)"});
+		$("#acceptcheck + label").css({'background-image': "url(../images/acceptsUnchecked.png)"});
+	//} else {
+	//	console.log("why not checked?");
+	//}
+}
+function acceptClick() {
+	// sanity check
+	//if($("#acceptcheck").attr("checked")) {
+		$("#regretcheck + label").css({'background-image': "url(../images/regretsUnchecked.png)"});
+		$("#acceptcheck + label").css({'background-image': "url(../images/acceptsChecked.png)"});
+	//} else {
+	//	console.log("why not checked?");
+	//}
+}
+
 function init() {
 	$("#slider").nivoSlider({
 		manualAdvance : true,
@@ -34,7 +53,8 @@ function init() {
 
 	$(".tiercontent").click(function(event) {event.stopPropagation();
 	});
-	var test = "This is a test ~(pos|1|verb|)~ and a second test ~(pos|2|adjective|)~ and now we test the last thing ~(ref|2|)~";
+	
+	//var test = "This is a test ~(pos|1|verb|)~ and a second test ~(pos|2|adjective|)~ and now we test the last thing ~(ref|2|)~";
 	//$(".madlib").madlib({description:test});
 	/*$(".madlib").madlib({
 		name : "Save The Date"
