@@ -45,7 +45,7 @@
 }
 .rsvpcheck
 {
-	display:none;
+	display:none
 }
 .checklabel
 {
@@ -57,7 +57,7 @@
 {
 	background: url(images/acceptsUnchecked.png) top left no-repeat;
 }*/
-input[type=radio]:checked + label.acceptchecklabel
+input[type=radio] + label.acceptchecklabel
 {
 	background: url(images/acceptsChecked.png) top left no-repeat;
 }

@@ -29,6 +29,16 @@
 				init();
 				// open first tier after 0.5 seconds
 				var timeoutID = window.setTimeout(function() { $(".tier1").click(); }, 500);
+				
+				// really special case where you change to regret, submit an rsvp, and back into this page.
+				// then the background image of accept / reject goes back to default css but reject is still checked
+				if($("#regretcheck").attr('checked')) {
+					$("#regretcheck + label").css({'background-image': "url(../images/regretsChecked.png)"});
+					$("#acceptcheck + label").css({'background-image': "url(../images/acceptsUnchecked.png)"});
+				} else {
+					$("#regretcheck + label").css({'background-image': "url(../images/regretsUnchecked.png)"});
+					$("#acceptcheck + label").css({'background-image': "url(../images/acceptsChecked.png)"});
+				}
 			});
 		</script>
 		<link rel="stylesheet" type="text/css" href="../style.css">
@@ -81,11 +91,11 @@
 								<input type="text" name="entry.0.single" class="rsvpNameText" />
 								</div>
 							
-								<input type="radio" class="rsvpcheck" name="entry.1.group" value="accept" id="acceptcheck" checked="checked" onclick="acceptClick();"/>
-								<label for="acceptcheck" class="acceptchecklabel checklabel"></label>
+								<input type="radio" class="rsvpcheck" name="entry.1.group" value="accept" id="acceptcheck" checked="checked" />
+								<label for="acceptcheck" class="acceptchecklabel checklabel" onclick="acceptClick();"></label>
 								
-								<input type="radio" class="rsvpcheck" name="entry.1.group" value="regret" id="regretcheck" onclick="regretClick();"/>
-								<label for="regretcheck" class="regretchecklabel checklabel">
+								<input type="radio" class="rsvpcheck" name="entry.1.group" value="regret" id="regretcheck"/>
+								<label for="regretcheck" class="regretchecklabel checklabel" onclick="regretClick();">
 								</label><br />
 								
 								Please indicate number of entr&eacute;es<br />

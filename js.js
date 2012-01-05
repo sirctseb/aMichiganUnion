@@ -24,21 +24,21 @@ if(debug) {
 
 function regretClick() {
 	// sanity check
-	if($("#regretcheck").attr("checked")) {
+	//if($("#regretcheck").attr("checked")) {
 		$("#regretcheck + label").css({'background-image': "url(../images/regretsChecked.png)"});
 		$("#acceptcheck + label").css({'background-image': "url(../images/acceptsUnchecked.png)"});
-	} else {
-		console.log("why not checked?");
-	}
+	//} else {
+	//	console.log("why not checked?");
+	//}
 }
 function acceptClick() {
 	// sanity check
-	if($("#acceptcheck").attr("checked")) {
+	//if($("#acceptcheck").attr("checked")) {
 		$("#regretcheck + label").css({'background-image': "url(../images/regretsUnchecked.png)"});
 		$("#acceptcheck + label").css({'background-image': "url(../images/acceptsChecked.png)"});
-	} else {
-		console.log("why not checked?");
-	}
+	//} else {
+	//	console.log("why not checked?");
+	//}
 }
 
 function init() {
