@@ -53,10 +53,10 @@
 	display:inline-block;
 	cursor:pointer;
 }
-input[type=radio] + label.acceptchecklabel
+/*input[type=radio] + label.acceptchecklabel
 {
 	background: url(images/acceptsUnchecked.png) top left no-repeat;
-}
+}*/
 input[type=radio]:checked + label.acceptchecklabel
 {
 	background: url(images/acceptsChecked.png) top left no-repeat;
@@ -65,10 +65,10 @@ input[type=radio] + label.regretchecklabel
 {
 	background: url(images/regretsUnchecked.png) top left no-repeat;
 }
-input[type=radio]:checked + label.regretchecklabel
+/*input[type=radio]:checked + label.regretchecklabel
 {
 	background: url(images/regretsChecked.png) top left no-repeat;
-}
+}*/
 .entreeCountInput
 {
 	width:50px;

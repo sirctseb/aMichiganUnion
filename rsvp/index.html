@@ -81,11 +81,12 @@
 								<input type="text" name="entry.0.single" class="rsvpNameText" />
 								</div>
 							
-								<input type="radio" class="rsvpcheck" name="entry.1.group" value="accept" id="acceptcheck" checked="checked"/>
+								<input type="radio" class="rsvpcheck" name="entry.1.group" value="accept" id="acceptcheck" checked="checked" onclick="acceptClick();"/>
 								<label for="acceptcheck" class="acceptchecklabel checklabel"></label>
 								
-								<input type="radio" class="rsvpcheck" name="entry.1.group" value="regret" id="regretcheck"/>
-								<label for="regretcheck" class="regretchecklabel checklabel"></label><br />
+								<input type="radio" class="rsvpcheck" name="entry.1.group" value="regret" id="regretcheck" onclick="regretClick();"/>
+								<label for="regretcheck" class="regretchecklabel checklabel">
+								</label><br />
 								
 								Please indicate number of entr&eacute;es<br />
 								<input type="text" class="entreeCountInput" name="entry.2.single" id="Tenderloin" value="0"/>
