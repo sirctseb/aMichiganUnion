@@ -24,7 +24,12 @@
 		<script type="text/javascript" src="../madlib.js">
 		</script>
 		<script type="text/javascript">
-			$(init);
+			$(function() {
+				// do normal init
+				init();
+				// open first tier after 0.5 seconds
+				var timeoutID = window.setTimeout(function() { $(".tier1").click(); }, 500);
+			});
 		</script>
 		<link rel="stylesheet" type="text/css" href="../style.css">
 		<link rel="stylesheet" type="text/css" href="../nivo-slider.css">

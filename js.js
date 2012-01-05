@@ -35,8 +35,6 @@ function init() {
 	$(".tiercontent").click(function(event) {event.stopPropagation();
 	});
 	
-	// TODO for debugging: open the first tier on load
-	var timeoutID = window.setTimeout(function() { $(".tier1").click(); }, 500);
 	//var test = "This is a test ~(pos|1|verb|)~ and a second test ~(pos|2|adjective|)~ and now we test the last thing ~(ref|2|)~";
 	//$(".madlib").madlib({description:test});
 	/*$(".madlib").madlib({
