@@ -39,7 +39,20 @@
 					$("#regretcheck + label").css({'background-image': "url(../images/regretsUnchecked.png)"});
 					$("#acceptcheck + label").css({'background-image': "url(../images/acceptsChecked.png)"});
 				}
+
+				$(".rsvpNameText").focus(function() {
+					$(".rsvpNameEmptyMessage").hide();
+				});
+
 			});
+			var validateRSVP = function() {
+				if($(".rsvpNameText").val() === "") {
+					// show empty name field message
+					$(".rsvpNameEmptyMessage").show();
+					return false;
+				}
+				return true;
+			};
 		</script>
 		<link rel="stylesheet" type="text/css" href="../style.css">
 		<link rel="stylesheet" type="text/css" href="../nivo-slider.css">
@@ -85,10 +98,11 @@
 							</div>
 							
 							<!-- Google form -->
-							<form action="https://docs.google.com/spreadsheet/formResponse?formkey=dGp1NkRGTlIxOGxtelp6VGM4Q2d0LVE6MQ&amp;ifq" method="POST" id="ss-form">
+							<form action="https://docs.google.com/spreadsheet/formResponse?formkey=dGp1NkRGTlIxOGxtelp6VGM4Q2d0LVE6MQ&amp;ifq" method="POST" id="ss-form" onsubmit="return validateRSVP();">
 							
 								<div class="rsvpNameWrapper">
-								<input type="text" name="entry.0.single" class="rsvpNameText" />
+									<div class="rsvpNameEmptyMessage">please enter your name</div>
+									<input type="text" name="entry.0.single" class="rsvpNameText" value=""/>
 								</div>
 							
 								<input type="radio" class="rsvpcheck" name="entry.1.group" value="accept" id="acceptcheck" checked="checked" />
